@@ -5,18 +5,18 @@
   </view>
   <view class='info'>
     <view class='col-2'>
-      <view class='section'>
+      <navigator url='../joinstock/index' class='section'>
         <image class='icon' src='../../static/img/u34.png'></image>
         <view class='txt'>采购入库</view>
-      </view>
-      <view class='section'>
+      </navigator>
+      <navigator url='../outstock/index' class='section'>
         <image class='icon' src='../../static/img/u36.png'></image>
         <view class='txt'>配送出库</view>
-      </view>
+      </navigator>
     </view>
-    <view class='row'>
+    <navigator url='../stock/index' class='row'>
       <image class='icon' src='../../static/img/u39.png'></image>
       <text class='txt'>盘点库存</text>
-    </view>
+    </navigator>
   </view>
 </view>

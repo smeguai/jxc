@@ -1,0 +1,128 @@
+.container {
+  min-height: 100vh;
+  background: #f2f2f2;
+}
+.container .addorder {
+  text-align: center;
+  background: #37d192;
+  padding: 24rpx 0;
+  display: flex;
+  justify-content: center;
+}
+.container .addorder .btn {
+  display: inline-block;
+}
+.container .addorder .btn .icon {
+  width: 66rpx;
+  height: 76rpx;
+}
+.container .addorder .btn .txt {
+  color: #fff;
+  font-size: 32rpx;
+  padding-top: 10rpx;
+}
+.container .menu-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  height: 120rpx;
+}
+.container .menu-wrapper .mode {
+  position: relative;
+  font-size: 36rpx;
+}
+.container .menu-wrapper .mode::before {
+  content: '';
+  position: absolute;
+  background: #f90;
+  width: 6rpx;
+  height: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -18rpx;
+}
+.container .menu-wrapper .menu {
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+.container .menu-wrapper .menu .icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+.container .menu-wrapper .menu .txt {
+  font-size: 28rpx;
+  padding-left: 6rpx;
+}
+.container .list .item {
+  background: #fff;
+  color: #333333;
+  padding: 10rpx 26rpx;
+  margin-bottom: 16rpx;
+}
+.container .list .item .row {
+  display: flex;
+  align-items: center;
+  padding-top: 6rpx;
+  position: relative;
+}
+.container .list .item .row .mode {
+  padding: 6rpx 8rpx;
+  border: 1rpx solid #FF9900;
+  color: #FF9900;
+  font-size: 24rpx;
+  border-radius: 8rpx;
+}
+.container .list .item .row .sh {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100rpx;
+  height: 88rpx;
+}
+.container .list .item .row .no {
+  flex: 1;
+  font-size: 28rpx;
+  color: 700;
+  padding: 0 16rpx;
+  box-sizing: border-box;
+}
+.container .list .item .row .status {
+  font-size: 28rpx;
+  color: #FF9900;
+}
+.container .list .item .seller {
+  display: flex;
+  padding: 12rpx 0;
+}
+.container .list .item .seller .name {
+  flex: 1;
+  font-size: 28rpx;
+}
+.container .list .item .seller .date {
+  color:#999999;
+  font-size: 24rpx;
+}
+.container .list .item .sec {
+  border-top: 1rpx solid #ddd;
+  font-size: 28rpx;
+  padding: 12rpx 0;
+  display: flex;
+  align-items: center;
+}
+.container .list .item .sec .sku {
+  flex: 1;
+}
+.container .list .item .sec .sku .num {
+  color:#FF9900;
+}
+.container .list .item .sec .btn {
+  color:#fff;
+  background: #FF9900;
+  width: 140rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 40rpx;
+  text-align: center;
+}

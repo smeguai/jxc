@@ -1,0 +1,104 @@
+.container {
+  min-height: 100vh;
+  background: #f2f2f2;
+}
+.container .menu-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  height: 120rpx;
+}
+.container .menu-wrapper .mode {
+  position: relative;
+  font-size: 36rpx;
+}
+.container .menu-wrapper .mode::before {
+  content: '';
+  position: absolute;
+  background: #f90;
+  width: 6rpx;
+  height: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -18rpx;
+}
+.container .menu-wrapper .menu {
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+.container .menu-wrapper .menu .icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+.container .menu-wrapper .menu .txt {
+  font-size: 28rpx;
+  padding-left: 6rpx;
+}
+.container .list .item {
+  background: #fff;
+  padding: 10rpx 24rpx;
+  margin-bottom: 16rpx;
+}
+.container .list .item .blo {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 28rpx;
+  padding: 10rpx 0;
+  color: #999;
+}
+.container .list .item .blo .barcode {
+  flex: 1;
+}
+.container .list .item .blo .status {
+  color: #FF9900;
+  font-size: 24rpx;
+}
+.container .list .item .blo .clo-3 {
+  flex: 33.3333%;
+  padding: 2rpx 0;
+}
+.container .list .item .blo .textright {
+  display: flex;
+  justify-content: flex-end;
+}
+.container .list .item .clo-3 .colorblack {
+  color: #333333;
+}
+.container .list .item .clo-3 .colorred {
+  color: #FF0000;
+}
+.container .list .item .mode {
+  text-align: center;
+}
+.container .list .item .name {
+  font-size: 28rpx;
+}
+.container .list .item .sec {
+  display: flex;
+  border-top: 1rpx solid #eee;
+  height: 88rpx;
+  align-items: center;
+}
+.container .list .item .sec .inf {
+  flex: 1;
+}
+.container .list .item .sec .inf .txt {
+  font-size: 24rpx;
+  color: #999;
+}
+.container .list .item .sec .inf .txt:nth-child(1) {
+  padding-bottom: 6rpx;
+}
+.container .list .item .sec .btn {
+  width: 140rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 40rpx;
+  background: #1fbb7c;
+  color: #fff;
+  text-align: center;
+  font-size: 28rpx;
+}
+

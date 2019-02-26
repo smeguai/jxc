@@ -1,11 +1,24 @@
 {
-  "pages":[
+  "pages": [
+    "pages/outstock/index",
+    "pages/nooutstock/index",
+    "pages/outofstock/index",
+    "pages/outstockdiff/index",
+
+
+    "pages/joinstock/index",
+
+
+
+    "pages/stock/index",
+
+
     "pages/index/index"
   ],
-  "window":{
+  "window": {
     "navigationBarBackgroundColor": "#37d192",
-    "backgroundTextStyle":"light",
+    "backgroundTextStyle": "light",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   }
 }

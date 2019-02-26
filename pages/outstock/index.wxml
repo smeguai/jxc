@@ -1,0 +1,48 @@
+<view class='container'>
+  <view class='menu-wrapper'>
+    <view class='mode'>全部</view>
+    <view class='menu' bindtap='handleFilterClick'>
+      <image class='icon' src='../../static/img/u135.png'></image>
+      <text class='txt'>筛选</text>
+    </view>
+  </view>
+  <view class='list'>
+    <view class='item' wx:for='{{list}}' data-mode='{{item.mode}}' bindtap='handleItemClick'>
+      <view class='row'>
+        <text class='no'>单号：{{item.no}}</text>
+        <text class='mode1' wx:if='{{item.mode===0}}'>{{mode[item.mode]}}</text>
+        <text class='mode2' wx:if='{{item.mode===1}}'>{{mode[item.mode]}}</text>
+        <image class='mode3' wx:if='{{item.mode===2}}' src='../../static/img/u1280.png'></image>
+      </view>
+      <view class='row'>
+        <text class='line'>线路：{{item.line}}</text>
+        <text class='date'>{{item.time}}</text>
+      </view>
+      <view class='sec'>
+        <view class='sku'>sku数量：<text class='num'>{{item.sku}}</text></view>
+        <view class='btn' wx:if='{{item.mode!==2}}'>出库</view>
+        <view class='details' wx:if='{{item.mode===2}}'>
+          <text class='txt'>查看详情</text>
+          <image class='icon' src='../../static/img/u129.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='filter-wrapper' wx:if='{{filter}}'>
+    <view class='mask' bindtap='handleFilterClick'></view>
+    <view class='filter'>
+      <view class='tit'>状态</view>
+      <view class='status'>
+        <view class='item active'>全部</view>
+        <view class='item '>未收货</view>
+        <view class='item '>差异</view>
+        <view class='item '>已收货</view> 
+      </view>
+      <view class='tit'>线路</view>
+      <picker mode='selector' range='{{[1,2,3,4]}}' class='pricker'>100001</picker>
+      <view class='tit'>时间</view>
+      <picker mode='selector' range='{{[1,2,3,4]}}' class='pricker'>2019-02-18</picker>
+      <view class='btn'>确定</view>
+    </view>
+  </view>
+</view>

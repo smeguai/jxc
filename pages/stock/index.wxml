@@ -1,0 +1,37 @@
+<view class='container'>
+  <view class='menu-wrapper'>
+    <view class='mode'>全部</view>
+    <view class='menu'>
+      <image class='icon' src='../../static/img/u135.png'></image>
+      <text class='txt'>筛选</text>
+    </view>
+  </view>
+  <view class='list'>
+    <view class='item'>
+      <view class='blo'>
+        <view class='barcode'>条码：1234567890</view>
+        <view class='status'>未盘</view>
+      </view>
+      <view class='name'>越南甜心芒果新鲜当季水果</view>
+      <view class='blo'>
+        <view class='clo-3'>单位：斤</view>
+        <view class='clo-3'>规格：100斤/箱</view>
+        <view class='clo-3 textright'>
+          <text class='txt'>库存：</text>
+          <text class='colorred'>500</text>
+          <text class='colorblack'>斤</text>
+        </view>
+        <view class='clo-3'>盘点：<text class='colorblack'>600斤</text></view>
+        <view class='clo-3'>差异：<text class='colorred'>600</text><text class='colorblack'>斤</text></view>
+        <view class='clo-3 mode'>差异</view>
+      </view>
+      <view class='sec'>
+        <view class='inf'>
+          <view class='txt'>上次盘点时间：2019-01-30</view>
+          <view class='txt'>上次盘点人：张三</view>
+        </view>
+        <view class='btn'>重盘</view>
+      </view>
+    </view>
+  </view>
+</view>
