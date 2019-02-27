@@ -38,10 +38,22 @@ Page({
   },
   handleItemClick(e) {
     let modeIdx = e.currentTarget.dataset.mode
-    if (modeIdx === 0) {
-      wx.navigateTo({
-        url: '../nooutstock/index'
-      })
+    switch(modeIdx) {
+      case 0:
+        wx.navigateTo({
+          url: '../nooutstock/index'
+        })
+      break;
+      case 1:
+        wx.navigateTo({
+          url: '../outstockdiff/index'
+        })
+      break;
+      case 2:
+        wx.navigateTo({
+          url: '../outofstock/index'
+        })
+      break;
     }
   },
   /**

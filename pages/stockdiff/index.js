@@ -1,10 +1,11 @@
-// pages/outstockdiff/index.js
+// pages/stockdiff/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    hasJoinStock: false,
     popsectionShow: false
   },
 
@@ -28,6 +29,7 @@ Page({
   onShow: function () {
 
   },
+
   handleItemClick() {
     this.setData({
       popsectionShow: !this.data.popsectionShow

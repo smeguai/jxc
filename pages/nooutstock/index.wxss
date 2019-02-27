@@ -115,7 +115,7 @@
   color: #FF0000;
 }
 .container .btns {
-  padding: 80rpx 0;
+  padding: 60rpx 0 10rpx 0;
   display: flex;
   justify-content: center;
 }
@@ -140,6 +140,128 @@
   width: 200rpx;
   text-align: center;
   margin-left: 20rpx;
+}
+.container .popsection {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+}
+.container .popsection .mask {
+  position: absolute;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,.2);
+}
+.container .popsection .modify {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  position: absolute;
+  left: 20rpx;
+  right: 20rpx;
+  z-index: 10;
+}
+.container .popsection .modify .details {
+  padding: 20rpx 0;
+  text-align: center;
+}
+.container .popsection .modify .details .txt {
+  font-size: 28rpx;
+}
+.container .popsection .modify .norm {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx 40rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #ddd;
+}
+.container .popsection .modify .norm .txt {
+  width: 50%;
+  font-size: 28rpx;
+  color: #999;
+}
+.container .popsection .modify .norm .txt .num {
+  color: #FF0000;
+  font-weight: 700;
+}
+.container .popsection .modify .from {
+  font-size: 28rpx;
+}
+.container .popsection .modify .from .row {
+  display: flex;
+  align-items: center;
+  padding-top: 20rpx;
+}
+.container .popsection .modify .from .row .txt0 {
+  width: 140rpx;
+}
+.container .popsection .modify .from .row .txt1 {
+  width: 30rpx;
+}
+.container .popsection .modify .from .row .date-wrapper {
+  flex: 1;
+  display: flex;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+.container .popsection .modify .from .row .date-wrapper .date {
+  border: 1rpx solid #d7d7d7;
+  box-sizing: border-box;
+  height: 88rpx;
+  line-height: 88rpx;
+  width: 300rpx;
+  text-align: center;
+  border-radius: 16rpx;
+}
+.container .popsection .modify .from .row .date-wrapper .strong {
+  font-size: 36rpx;
+  background: #f2f2f2;
+  border: 1rpx solid #d7d7d7;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 16rpx;
+  width: 150rpx;
+}
+.container .popsection .modify .from .row .count {
+  font-size: 36rpx;
+  background: #f2f2f2;
+  border: 1rpx solid #d7d7d7;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 16rpx;
+  flex: 1;
+  margin: 0 20rpx;
+}
+.container .popsection .modify .from .row .ipt {
+  border: 1rpx solid #d7d7d7;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 16rpx;
+  flex: 1;
+  margin: 0 20rpx;
+}
+.remarks {
+  flex:1;
+  height: 152rpx;
+  border: 1rpx solid #d7d7d7;
+  line-height: 30rpx;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  margin: 0 20rpx;
 }
 
 

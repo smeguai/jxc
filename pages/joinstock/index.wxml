@@ -40,7 +40,10 @@
       </view>
       <view class='sec'>
         <view class='sku'>sku数量：<text class='num'>3</text></view>
-        <view class='btn'>收货</view>
+        <view class='details'>
+          <text class='txt'>查看详情</text>
+          <image class='icon' src='../../static/img/u129.png'></image>
+        </view>
       </view>
     </view>
   </view>

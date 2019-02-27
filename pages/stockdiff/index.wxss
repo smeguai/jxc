@@ -45,6 +45,26 @@
   font-weight: 700;
   flex:1;
 }
+.container .order .row .no .mode0 {
+  font-size: 20rpx;
+  color: #1FBB7C;
+  font-weight: normal;
+  border-radius: 8rpx;
+  border: 1rpx solid #1FBB7C;
+  padding: 4rpx 8rpx;
+  box-sizing: border-box;
+  margin-right: 8rpx;
+}
+.container .order .row .no .mode1 {
+  font-size: 20rpx;
+  color: #FF9900;
+  border: 1rpx solid #FF9900;
+  font-weight: normal;
+  border-radius: 8rpx;
+  padding: 4rpx 8rpx;
+  box-sizing: border-box;
+  margin-right: 8rpx;
+}
 .container .order .row .sku {
   font-size: 24rpx;
 }
@@ -195,6 +215,9 @@
 .container .popsection .modify .details .txt {
   font-size: 28rpx;
 }
+.container .popsection .modify .details .txt .diff {
+  color: #FF9900;
+}
 .container .popsection .modify .norm {
   display: flex;
   flex-wrap: wrap;
@@ -291,7 +314,3 @@
   box-sizing: border-box;
   margin: 0 20rpx;
 }
-
-
-
-

@@ -3,8 +3,17 @@
     <input class='search' placeholder='请输入或扫描商品的条码'></input>
     <image class='icon' src='../../static/img/u256.png'></image>
   </view>
-  
-  <view class='order'>
+  <view class='order' wx:if='{{hasJoinStock}}'>
+    <view class='row'>
+      <view class='no'><text class='mode0'>手工录入</text>单号：DO1234567890</view>
+      <view class='time'>2019.01.09</view>
+    </view>
+    <view class='row'>
+      <view class='line'>供应商：长沙蝌蝌精选水果供应商</view>
+      <view class='sku'>sku数量：<text class='num'>4</text></view>
+    </view>
+  </view>
+  <view class='order' wx:else>
     <view class='row'>
       <view class='no'>单号：DO1234567890</view>
       <view class='time'>2019.01.09</view>
@@ -18,7 +27,22 @@
   <view class='cap'>商品</view>
 
   <view class='list'>
-    <view class='item' bindtap='handleItemClick'>
+    <view class='item' wx:if='{{hasJoinStock}}'>
+      <view class='row'>
+        <view class='no'>编号：1234567890123456</view>
+        <view class='outstock color_0'>收货<image class='icon' src='../../static/img/u129.png'></image></view>
+      </view>
+      <view class='info'>
+        <view class='name'>越南甜心芒果新鲜当季水果</view>
+        <view class='desc'>
+          <view class='txt'>单位：斤</view>
+          <view class='txt'>规格：10斤/箱</view>
+          <view class='txt'>价格：10元/斤</view>
+          <view class='txt'>应出：<text class='num'>500</text>斤</view>
+        </view>
+      </view>
+    </view>
+    <view class='item' wx:else bindtap='handleItemClick'>
       <view class='row'>
         <view class='no'><text class='diff'>[退货差异]</text>编号：1234567890123456</view>
         <!-- <view class='outstock color_0'>出库<image class='icon' src='../../static/img/u129.png'></image></view> -->
@@ -52,7 +76,7 @@
     <view class='mask'></view>
     <view class='modify'>
       <view class='details'>
-        <view class='txt'>商品条码：1234567890</view>
+        <view class='txt'><text class='diff'>[退货差异]</text>商品条码：1234567890</view>
         <view class='txt'>越南甜心芒果新鲜当季水果</view>
       </view>
       <view class='norm'>
@@ -61,14 +85,14 @@
         <view class='txt'>价格：10元/斤</view>
         <view class='txt'>应出：<text class='count'>500</text>斤</view>
       </view>
-      <view class='norm'>
+      <!-- <view class='norm'>
         <view class='difftxt'>单位：斤</view>
         <view class='difftxt'>规格：10斤/箱</view>
         <view class='difftxt'>价格：10元/斤</view>
         <view class='difftxt'>差异：<text class='num'>500</text>斤</view>
         <view class='difftxt'>退货：<text class='num'>500</text>斤</view>
         <view class='difftxt'>应出：<text class='count'>500</text>斤</view>
-      </view>
+      </view> -->
       <view class='from'>
         <view class='row'>
           <view class='txt0'>保质日期：</view>

@@ -117,6 +117,18 @@
 .container .list .item .sec .sku .num {
   color:#FF9900;
 }
+.container .list .item .sec .details {
+  display: flex;
+  align-items: center;
+}
+.container .list .item .sec .details .txt {
+  font-size: 24rpx;
+  color: #999;
+}
+.container .list .item .sec .details .icon {
+  width: 24rpx;
+  height: 24rpx;
+}
 .container .list .item .sec .btn {
   color:#fff;
   background: #FF9900;

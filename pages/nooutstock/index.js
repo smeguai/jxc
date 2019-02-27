@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    popsectionShow: false
   },
 
   /**
@@ -28,6 +28,13 @@ Page({
   onShow: function () {
 
   },
+
+  handleItemClick() {
+    this.setData({
+      popsectionShow: !this.data.popsectionShow
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面隐藏
