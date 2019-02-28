@@ -138,3 +138,82 @@
   border-radius: 40rpx;
   text-align: center;
 }
+.container .filter-wrapper {
+  z-index: 11;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.container .filter-wrapper .mask {
+  position: absolute;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,.2);
+  /* background: yellow */
+}
+.container .filter-wrapper .filter {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  width: 660rpx;
+  background: #fff;
+  padding-top: 20rpx;
+}
+.container .filter-wrapper .filter .tit {
+  position: relative;
+  font-size: 36rpx;
+  padding: 20rpx;
+}
+.container .filter-wrapper .filter .tit::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  content: '';
+  width: 6rpx;
+  height: 44rpx;
+  background: #f90;
+}
+.container .filter-wrapper .status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.container .filter-wrapper .status .item {
+  width: 286rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  margin: 10rpx 0;
+  border: 1rpx solid #999;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+.container .filter-wrapper .status .item.active {
+  border: 0;
+  color:#fff;
+  background: #f90;
+}
+.container .filter-wrapper .pricker {
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #f2f2f2;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  text-align: center;
+  margin: 0 20rpx;
+}
+.container .filter-wrapper  .btn {
+  margin-top: 80rpx;
+  color: #fff;
+  font-size: 28rpx;
+  background: #37d192;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+}

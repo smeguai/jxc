@@ -2,40 +2,33 @@
   min-height: 100vh;
   background: #f2f2f2;
 }
-.container .menu-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20rpx;
-  height: 120rpx;
+.container .search-wrapper{
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #37d192;
+  padding: 20rpx;
+  z-index: 100;
 }
-.container .menu-wrapper .mode {
-  position: relative;
-  font-size: 36rpx;
-}
-.container .menu-wrapper .mode::before {
-  content: '';
-  position: absolute;
-  background: #f90;
-  width: 6rpx;
-  height: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-  left: -18rpx;
-}
-.container .menu-wrapper .menu {
-  display: flex;
-  align-items: center;
-  text-align: right;
-}
-.container .menu-wrapper .menu .icon {
-  width: 36rpx;
-  height: 36rpx;
-}
-.container .menu-wrapper .menu .txt {
+.container .search-wrapper .search {
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 16rpx;
   font-size: 28rpx;
-  padding-left: 6rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  background: #fff;
 }
+.container .search-wrapper .icon {
+  width: 44rpx;
+  height: 44rpx;
+  position: absolute;
+  right: 40rpx;
+  top: 40rpx;
+  z-index: 9;
+}
+
 .container .list .item {
   background: #fff;
   padding: 10rpx 24rpx;
@@ -50,10 +43,14 @@
 }
 .container .list .item .blo .barcode {
   flex: 1;
-}
-.container .list .item .blo .status {
-  color: #FF9900;
+  color: #333;
   font-size: 24rpx;
+}
+.container .list .item .blo .status1 {
+  color: #FF9900;
+}
+.container .list .item .blo .status2 {
+  color:#CCCCCC;
 }
 .container .list .item .blo .clo-3 {
   flex: 33.3333%;
@@ -69,8 +66,13 @@
 .container .list .item .clo-3 .colorred {
   color: #FF0000;
 }
-.container .list .item .mode {
+.container .list .item .mode1 {
   text-align: center;
+  color: #FF0000;
+}
+.container .list .item .mode2 {
+  text-align: center;
+  color: #333333;
 }
 .container .list .item .name {
   font-size: 28rpx;
@@ -96,9 +98,121 @@
   height: 60rpx;
   line-height: 60rpx;
   border-radius: 40rpx;
-  background: #1fbb7c;
   color: #fff;
   text-align: center;
   font-size: 28rpx;
 }
+.container .list .item .sec .btn.mode1 {
+  background: #FF9900;
+}
+.container .list .item .sec .btn.mode2 {
+  background: #1fbb7c;
+}
+.container .popmasker {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,.2);
+  padding: 0 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container .popmasker .main {
+  width: 100%;
+  background: #fff;
+  padding: 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  border-radius: 20rpx;
+}
+.container .popmasker .main .row {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #ddd;
+  display: flex;
+  align-items: center;
+}
+.container .popmasker .main .row .txt-2:nth-child(1) {
+  flex: 1;
+  color: #999;
+}
+.container .popmasker .main .row .txt-2:nth-child(2) {
+  color: #999;
+  padding-left: 10rpx;
+}
+.container .popmasker .main .row .icon {
+  width: 44rpx;
+  height: 44rpx;
+  padding-left: 8rpx;
+}
+.container .popmasker .main .row .inf-2 {
+  width: 50%;
+  padding: 0 5rpx;
+  box-sizing: border-box;
+}
+.container .popmasker .main .row .inf-2:nth-child(1) {
+  display: flex;
+}
+.container .popmasker .main .row .inf-2:nth-child(2) {
+  border-left: 1rpx solid #ddd;
+  text-align: right;
+}
+.container .popmasker .main .row .txt .num {
+  font-size: 36rpx;
+  color: #FF0000;
+}
+.container .popmasker .main .btn {
+  background: #37d192;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 14rpx;
+  text-align: center;
+  margin: 40rpx 0;
+  color: #fff;
+}
+.mouse-wrapper {
+  background: #f2f2f2;
+  display: flex;
+  color: #666;
+}
+.mouse-wrapper .number {
+  flex: 1;
+  display: flex;
+  flex-wrap:wrap;
+}
+.mouse-wrapper .number .text {
+  width: 33.3333%;
+  border: 1rpx solid #ddd;
+  box-sizing: border-box;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+}
+.mouse-wrapper .operation {
+  width: 168rpx;
+  display: flex;
+  flex-direction: column;
+}
+.mouse-wrapper .operation .reset {
+  height: 88rpx;
+  border: 1rpx solid #ddd;
+  box-sizing: border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.mouse-wrapper .operation .confirm {
+  flex: 1;
+  box-sizing: border-box;
+  border: 1rpx solid #ddd;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+
 

@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/stock/index",
+    "pages/index/index",
     "pages/joinstock/index",
     "pages/stockdiff/index",
     "pages/outstock/index",
     "pages/outstockdiff/index",
     "pages/outofstock/index",
     "pages/nooutstock/index",
-    "pages/stock/index",
-    "pages/index/index"
+    "pages/goodsmode/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#37d192",

@@ -7,7 +7,7 @@
     </view>
   </view>
   <view class='list'>
-    <view class='item' wx:for='{{list}}' data-mode='{{item.mode}}' bindtap='handleItemClick'>
+    <view class='item' wx:for='{{list}}' data-mode='{{item.mode}}'>
       <view class='row'>
         <text class='no'>单号：{{item.no}}</text>
         <text class='mode1' wx:if='{{item.mode===0}}'>{{mode[item.mode]}}</text>
@@ -20,7 +20,7 @@
       </view>
       <view class='sec'>
         <view class='sku'>sku数量：<text class='num'>{{item.sku}}</text></view>
-        <view class='btn' wx:if='{{item.mode!==2}}'>出库</view>
+        <view class='btn' wx:if='{{item.mode!==2}}' bindtap='handleBtnClick'>出库</view>
         <view class='details' wx:if='{{item.mode===2}}'>
           <text class='txt'>查看详情</text>
           <image class='icon' src='../../static/img/u129.png'></image>
@@ -34,9 +34,9 @@
       <view class='tit'>状态</view>
       <view class='status'>
         <view class='item active'>全部</view>
-        <view class='item '>未收货</view>
+        <view class='item '>未出库</view>
         <view class='item '>差异</view>
-        <view class='item '>已收货</view> 
+        <view class='item '>已出库</view> 
       </view>
       <view class='tit'>线路</view>
       <picker mode='selector' range='{{[1,2,3,4]}}' class='pricker'>100001</picker>

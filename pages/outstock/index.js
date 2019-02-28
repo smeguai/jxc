@@ -36,25 +36,10 @@ Page({
       filter: !this.data.filter
     })
   },
-  handleItemClick(e) {
-    let modeIdx = e.currentTarget.dataset.mode
-    switch(modeIdx) {
-      case 0:
-        wx.navigateTo({
-          url: '../nooutstock/index'
-        })
-      break;
-      case 1:
-        wx.navigateTo({
-          url: '../outstockdiff/index'
-        })
-      break;
-      case 2:
-        wx.navigateTo({
-          url: '../outofstock/index'
-        })
-      break;
-    }
+  handleBtnClick() {
+    wx.navigateTo({
+      url: '../goodsmode/index?mode=2',
+    })
   },
   /**
    * 生命周期函数--监听页面显示

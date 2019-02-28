@@ -1,18 +1,22 @@
-// pages/joinstock/index.js
+// pages/goodsmode/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    filter: false,
+    //  stockMode : 1 采购入库 2 配送出库
+    stockMode: 0,
+    popsectionShow: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+        stockMode: options.mode
+    })
   },
 
   /**
@@ -28,14 +32,9 @@ Page({
   onShow: function () {
 
   },
-  handleBtnClick() {
-    wx.navigateTo({
-      url: '../goodsmode/index?mode=1',
-    })
-  },
-  handleFilterClick() {
+  handleItemClick() {
     this.setData({
-      filter: !this.data.filter
+      popsectionShow: !this.data.popsectionShow
     })
   },
   /**

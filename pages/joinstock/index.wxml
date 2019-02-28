@@ -7,7 +7,7 @@
   </view>
   <view class='menu-wrapper'>
     <view class='mode'>全部</view>
-    <view class='menu'>
+    <view class='menu' bindtap='handleFilterClick'>
       <image class='icon' src='../../static/img/u135.png'></image>
       <text class='txt'>筛选</text>
     </view>
@@ -25,7 +25,7 @@
       </view>
       <view class='sec'>
         <view class='sku'>sku数量：<text class='num'>3</text></view>
-        <view class='btn'>收货</view>
+        <view class='btn' bindtap='handleBtnClick'>收货</view>
       </view>
     </view>
     <view class='item'>
@@ -45,6 +45,24 @@
           <image class='icon' src='../../static/img/u129.png'></image>
         </view>
       </view>
+    </view>
+  </view>
+  
+  <view class='filter-wrapper' wx:if='{{filter}}'>
+    <view class='mask' bindtap='handleFilterClick'></view>
+    <view class='filter'>
+      <view class='tit'>状态</view>
+      <view class='status'>
+        <view class='item active'>全部</view>
+        <view class='item '>未收货</view>
+        <view class='item '>差异</view>
+        <view class='item '>已收货</view> 
+      </view>
+      <view class='tit'>供应商</view>
+      <picker mode='selector' range='{{[1,2,3,4]}}' class='pricker'>100001</picker>
+      <view class='tit'>时间</view>
+      <picker mode='date' class='pricker'>2019-02-18</picker>
+      <view class='btn'>确定</view>
     </view>
   </view>
 </view>
