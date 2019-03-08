@@ -46,13 +46,13 @@
   display: flex;
   padding: 10rpx 20rpx;
   box-sizing: border-box;
+  font-size: 28rpx;
+  align-items: center;
 }
 .container .list .item .sec .sku {
-  font-size: 24rpx;
   flex: 1;
 }
 .container .list .item .sec .sku .num {
-  font-size: 36rpx;
   color: #FF9900;
 }
 .container .list .item .sec .details {

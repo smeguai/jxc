@@ -130,23 +130,25 @@
   border-radius: 20rpx;
 }
 .container .popmasker .main .row {
-  padding: 20rpx 0;
+  padding: 24rpx 0;
   border-bottom: 1rpx solid #ddd;
   display: flex;
   align-items: center;
 }
-.container .popmasker .main .row .txt-2:nth-child(1) {
+.container .popmasker .main .row .ipt {
   flex: 1;
-  color: #999;
-}
-.container .popmasker .main .row .txt-2:nth-child(2) {
-  color: #999;
-  padding-left: 10rpx;
+  border: 1rpx solid #ddd;
+  box-sizing: border-box;
+  padding: 0 16rpx;
 }
 .container .popmasker .main .row .icon {
   width: 44rpx;
   height: 44rpx;
   padding-left: 8rpx;
+  position: absolute;
+  right: 10rpx;
+  top: 6rpx;
+  z-index: 100;
 }
 .container .popmasker .main .row .inf-2 {
   width: 50%;
@@ -155,6 +157,8 @@
 }
 .container .popmasker .main .row .inf-2:nth-child(1) {
   display: flex;
+  align-items: center;
+  position: relative;
 }
 .container .popmasker .main .row .inf-2:nth-child(2) {
   border-left: 1rpx solid #ddd;
@@ -173,17 +177,17 @@
   margin: 40rpx 0;
   color: #fff;
 }
-.mouse-wrapper {
+.container .popmasker .main .mouse-wrapper {
   background: #f2f2f2;
   display: flex;
   color: #666;
 }
-.mouse-wrapper .number {
+.container .popmasker .main .mouse-wrapper .number {
   flex: 1;
   display: flex;
   flex-wrap:wrap;
 }
-.mouse-wrapper .number .text {
+.container .popmasker .main .mouse-wrapper .number .text {
   width: 33.3333%;
   border: 1rpx solid #ddd;
   box-sizing: border-box;
@@ -191,12 +195,12 @@
   line-height: 88rpx;
   text-align: center;
 }
-.mouse-wrapper .operation {
+.container .popmasker .main .mouse-wrapper .operation {
   width: 168rpx;
   display: flex;
   flex-direction: column;
 }
-.mouse-wrapper .operation .reset {
+.container .popmasker .main .mouse-wrapper .operation .reset {
   height: 88rpx;
   border: 1rpx solid #ddd;
   box-sizing: border-box;
@@ -204,7 +208,7 @@
   align-items:center;
   justify-content:center;
 }
-.mouse-wrapper .operation .confirm {
+.container .popmasker .main .mouse-wrapper .operation .confirm {
   flex: 1;
   box-sizing: border-box;
   border: 1rpx solid #ddd;
@@ -212,7 +216,89 @@
   align-items:center;
   justify-content:center;
 }
-
-
-
-
+.container .popmasker .main .numipt {
+  text-align: right;
+  padding: 18rpx 20rpx;
+  border: 1rpx solid #ddd;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+}
+.container .filter-wrapper {
+  z-index: 111;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.container .filter-wrapper .mask {
+  position: absolute;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,.2);
+  /* background: yellow */
+}
+.container .filter-wrapper .filter {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  width: 660rpx;
+  background: #fff;
+  padding-top: 20rpx;
+}
+.container .filter-wrapper .filter .tit {
+  position: relative;
+  font-size: 36rpx;
+  padding: 20rpx;
+}
+.container .filter-wrapper .filter .tit::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  content: '';
+  width: 6rpx;
+  height: 44rpx;
+  background: #f90;
+}
+.container .filter-wrapper .status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.container .filter-wrapper .status .item {
+  width: 286rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  margin: 10rpx 0;
+  border: 1rpx solid #999;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+.container .filter-wrapper .status .item.active {
+  border: 0;
+  color:#fff;
+  background: #f90;
+}
+.container .filter-wrapper .pricker {
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #f2f2f2;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  text-align: center;
+  margin: 0 20rpx;
+}
+.container .filter-wrapper  .btn {
+  margin-top: 80rpx;
+  color: #fff;
+  font-size: 28rpx;
+  background: #37d192;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+}

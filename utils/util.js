@@ -1,19 +1,18 @@
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
-
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+const getNowFormatDate = () => {
+  let date = new Date()
+  let seperator = '-'
+  let y = date.getFullYear()
+  let m = date.getMonth() + 1
+  let strDate = date.getDate()
+  if (m >= 1 && m <= 9) {
+    m = "0" + m
+  }
+  if (strDate >= 0 && strDate <= 9) {
+    strDate = "0" + strDate
+  }
+  var currentdate = y + seperator + m + seperator + strDate
+  return currentdate
 }
-
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
-
 module.exports = {
-  formatTime: formatTime
+  getNowFormatDate
 }

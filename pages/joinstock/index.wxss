@@ -90,7 +90,12 @@
 }
 .container .list .item .row .status {
   font-size: 28rpx;
+}
+.container .list .item .row .status.color_0 {
   color: #FF9900;
+}
+.container .list .item .row .status.color_1 {
+  color: red;
 }
 .container .list .item .seller {
   display: flex;

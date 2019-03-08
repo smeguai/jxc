@@ -1,0 +1,30 @@
+.container {
+  padding: 0 40rpx;
+}
+.container .section {
+  display: flex;
+  align-items: center;
+  padding-top: 40rpx;
+}
+.container .section .txt {
+  font-size: 28rpx;
+}
+.container .section .ipt {
+  flex: 1;
+  border-radius: 8rpx;
+  border: 1rpx solid #ddd;
+  font-size: 28rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+}
+.container .signin{
+  background: #37d192;
+  color: #fff;
+  font-size: 32rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  margin-top: 80rpx;
+}

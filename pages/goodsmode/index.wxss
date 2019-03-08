@@ -9,6 +9,7 @@
   right: 0;
   background: #37d192;
   padding: 20rpx;
+  z-index: 99;
 }
 .container .search-wrapper .search {
   height: 88rpx;
@@ -75,22 +76,22 @@
   flex:1;
   font-size: 28rpx;
 }
-.container .cap {
+.container .tab-wrapper {
+  background: #f2f2f2;
+  font-size: 32rpx;
+  display: flex;
+  padding: 0 20rpx;
+  justify-content: center;
+  box-sizing: border;
+}
+.container .tab-wrapper .item {
+  flex: 1;
+  text-align: center;
   height: 88rpx;
   line-height: 88rpx;
-  padding-left: 20rpx;
-  position: relative;
-  font-size: 28rpx;
 }
-.container .cap::before {
-  position: absolute;
-  content: '';
-  left: 0rpx;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4rpx;
-  height: 40rpx;
-  background: #FF9900;
+.container .tab-wrapper .item.active {
+  color: #FF9900;
 }
 .container .list .item {
   margin-bottom: 14rpx;
@@ -101,21 +102,29 @@
   display: flex;
   align-items: center;
   font-size: 28rpx;
-  padding: 20rpx;
+  padding: 0 20rpx 10rpx 20rpx;
   border-bottom: 1rpx solid #ddd;
+  position: relative;
 }
 .container .list .item .row .no {
   flex: 1;
 }
+.container .list .item .row .sh {
+  position: absolute;
+  width: 100rpx;
+  height: 88rpx;
+  right: 20rpx;
+  top: 0;
+}
 .container .list .item .row .no .diff {
-  color: #FF9900;
+  color: red;
   padding-right: 8rpx;
 }
 .container .list .item .row .color_0 {
   color: #FF9900;
 }
 .container .list .item .row .color_1 {
-  color: #999;
+  color: red;
 }
 .container .list .item .row .outstock .icon {
   width: 24rpx;
@@ -184,10 +193,10 @@
   top: 0;
   display: flex;
   align-items: center;
+  z-index: 100;
 }
 .container .popsection .mask {
   position: absolute;
-  z-index: 9;
   height: 100%;
   width: 100%;
   background: rgba(0,0,0,.2);
@@ -200,7 +209,6 @@
   position: absolute;
   left: 20rpx;
   right: 20rpx;
-  z-index: 10;
 }
 .container .popsection .modify .details {
   padding: 20rpx 0;
@@ -257,7 +265,7 @@
   box-sizing: border-box;
   justify-content: space-between;
 }
-.container .popsection .modify .from .row .date-wrapper .date {
+.container .popsection .modify .from .row .date {
   border: 1rpx solid #d7d7d7;
   box-sizing: border-box;
   height: 88rpx;
@@ -266,19 +274,7 @@
   text-align: center;
   border-radius: 16rpx;
 }
-.container .popsection .modify .from .row .date-wrapper .strong {
-  font-size: 36rpx;
-  background: #f2f2f2;
-  border: 1rpx solid #d7d7d7;
-  height: 88rpx;
-  line-height: 88rpx;
-  text-align: center;
-  box-sizing: border-box;
-  border-radius: 16rpx;
-  width: 150rpx;
-}
 .container .popsection .modify .from .row .count {
-  font-size: 36rpx;
   background: #f2f2f2;
   border: 1rpx solid #d7d7d7;
   height: 88rpx;
@@ -307,4 +303,5 @@
   border-radius: 16rpx;
   box-sizing: border-box;
   margin: 0 20rpx;
+  padding: 20rpx;
 }

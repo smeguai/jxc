@@ -55,7 +55,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-radius: 4rpx;
+  border-radius: 6rpx;
 }
 .container .info .row .icon {
   width: 200rpx;

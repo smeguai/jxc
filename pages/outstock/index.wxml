@@ -7,21 +7,21 @@
     </view>
   </view>
   <view class='list'>
-    <view class='item' wx:for='{{list}}' data-mode='{{item.mode}}'>
+    <view class='item' wx:for='{{outList}}' data-key='{{index}}' data-mode='{{item.outStatus}}' bindtap='handleItemClick'>
       <view class='row'>
-        <text class='no'>单号：{{item.no}}</text>
-        <text class='mode1' wx:if='{{item.mode===0}}'>{{mode[item.mode]}}</text>
-        <text class='mode2' wx:if='{{item.mode===1}}'>{{mode[item.mode]}}</text>
-        <image class='mode3' wx:if='{{item.mode===2}}' src='../../static/img/u1280.png'></image>
+        <text class='no'>单号：{{item.orderNo}}</text>
+        <text class='mode1' wx:if='{{item.outStatus==0}}'>{{mode[item.outStatus]}}</text>
+        <text class='mode2' wx:if='{{item.outStatus==2}}'>{{mode[item.outStatus]}}</text>
+        <image class='mode3' wx:if='{{item.outStatus==1}}' src='../../static/img/u1280.png'></image>
       </view>
       <view class='row'>
-        <text class='line'>线路：{{item.line}}</text>
-        <text class='date'>{{item.time}}</text>
+        <text class='line'>线路：{{item.routeName}}</text>
+        <text class='date'>{{item.outDate}}</text>
       </view>
       <view class='sec'>
-        <view class='sku'>sku数量：<text class='num'>{{item.sku}}</text></view>
-        <view class='btn' wx:if='{{item.mode!==2}}' bindtap='handleBtnClick'>出库</view>
-        <view class='details' wx:if='{{item.mode===2}}'>
+        <view class='sku'>sku数量：<text class='num'>{{item.skuNum}}</text></view>
+        <view class='btn' wx:if='{{item.mode!==1}}'>出库</view>
+        <view class='details' wx:if='{{item.mode===1}}'>
           <text class='txt'>查看详情</text>
           <image class='icon' src='../../static/img/u129.png'></image>
         </view>

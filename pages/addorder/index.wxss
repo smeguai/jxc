@@ -1,0 +1,266 @@
+.container {
+  font-size: 28rpx;
+  background: #f2f2f2;
+  min-height: 100vh;
+  padding-bottom: 108rpx;
+  box-sizing: border-box;
+}
+.container .top {
+  background: #fff;
+}
+.container .top .no {
+  font-weight: 700;
+  padding: 20rpx 20rpx 16rpx 20rpx;
+  border-bottom: 1rpx solid #e3e3e3;
+}
+.container .top .picker {
+  margin: 20rpx;
+  padding: 0 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: #f2f2f2;
+  border-radius: 18rpx;
+  position: relative;
+
+}
+.container .top .picker .txt {
+  color: #333;
+}
+.container .top .picker .icon {
+  width: 24rpx;
+  height: 14rpx;
+  position: absolute;
+  right: 20rpx;
+  top: 40rpx;
+}
+.container .top .addgoods {
+  text-align: center;
+  border-top: 1rpx solid #e3e3e3;
+  padding: 28rpx 0;
+}
+.container .top .addgoods .icon {
+  width: 100rpx;
+  height: 100rpx;
+}
+.container .top .addgoods .txt {
+  font-size: 32rpx;
+  padding-top: 10rpx;
+}
+.container .top .sec {
+  position: relative;
+  padding: 28rpx 20rpx;
+  background: #f2f2f2;
+  display: flex;
+}
+.container .top .sec::before {
+  position: absolute;
+  content: '';
+  width: 6rpx;
+  height: 44rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  background: #FF9900;
+}
+.container .top .sec .title {
+  flex: 1;
+}
+.container .top .sec .sku {
+  font-size: 24rpx;
+}
+.container .top .sec .sku .txt {
+  font-size: 28rpx;
+  color: #FF9900;
+}
+.container .list-wrapper .item {
+  background: #fff;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+.container .list-wrapper .item .no {
+  border-bottom: 1rpx solid #e4e4e4;
+  padding-bottom: 20rpx;
+}
+.container .list-wrapper .item .name {
+  padding: 28rpx 0 20rpx;
+}
+.container .list-wrapper .item .desc {
+  display: flex;
+  flex-wrap: wrap;
+}
+.container .list-wrapper .item .desc .txt {
+  width: 50%;
+  padding: 10rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #999999;
+}
+.container .list-wrapper .item .desc .txt .num {
+  font-size: 32rpx;
+  color: #FF0000;
+}
+.container .confirm {
+  background: #37d192;
+  height: 88rpx;
+  line-height: 88rpx;
+  color:#fff;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.container .masker {
+  background: rgba(0,0,0,.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 20rpx;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+}
+.container .masker .addgoods {
+  background: #fff;
+  border-radius: 18rpx;
+  width: 100%;
+  overflow: hidden;
+}
+.container .masker .addgoods .row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20rpx;
+}
+.container .masker .addgoods .row .item {
+  width: 50%;
+  padding: 10rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.container .masker .addgoods .row .item .txt {
+  flex: 1;
+}
+.container .masker .addgoods .row .item .ipt {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 12rpx;
+  background: #f2f2f2;
+}
+.container .masker .addgoods .headline {
+  color: #fff;
+  background: #37d192;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  margin-bottom: 10rpx;
+}
+.container .masker .addgoods .btns {
+  padding: 80rpx 0 40rpx 0;
+  display: flex;
+  justify-content: center;
+}
+.container .masker .addgoods .cancel {
+  border: 1rpx solid #f90;
+  box-sizing: border-box;
+  color: #f90;
+  height: 88rpx;
+  line-height: 88rpx;
+  width: 200rpx;
+  text-align: center;
+  border-radius: 12rpx;
+}
+.container .masker .addgoods .submit {
+  height: 88rpx;
+  line-height: 88rpx;
+  width: 200rpx;
+  text-align: center;
+  background: #37d192;
+  color: #fff;
+  border-radius: 12rpx;
+  margin-left: 20rpx;
+}
+.container .masker .addgoods .ipt-wrapper {
+  padding: 10rpx 20rpx;
+  position: relative;
+}
+.container .masker .addgoods .ipt-wrapper .ipt {
+  height: 88rpx;
+  line-height: 88rpx;
+  padding: 0 70rpx 0 20rpx;
+  border-radius: 18rpx;
+  background: #f2f2f2;
+}
+.container .masker .addgoods .ipt-wrapper .qrcode {
+  width: 44rpx;
+  height: 42rpx;
+  position: absolute;
+  right: 40rpx;
+  top: 36rpx;
+}
+.container .masker .addgoods .ipt-wrapper .list {
+  width: 44rpx;
+  height: 38rpx;
+  position: absolute;
+  right: 40rpx;
+  top: 36rpx;
+}
+.container .goodslistmask {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: rgba(0,0,0,.2);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.container .goodslistmask .main {
+  overflow: hidden;
+  background: #fff;
+  border-radius: 18rpx;
+  width: 100%;
+}
+.container .goodslistmask .main .headline {
+  color: #fff;
+  background: #37d192;
+  text-align: center;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+.container .goodslistmask .main .headertb {
+  display: flex;
+  padding: 0 20rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  background: #f2f2f2;
+}
+.container .goodslistmask .main .headertb .txt {
+  flex: 1;
+  text-align: center;
+}
+.container .goodslistmask .main .item {
+  display: flex;
+  padding: 20rpx;
+  align-items: center;
+}
+.container .goodslistmask .main .item .txt {
+  text-align: center;
+  flex: 1;
+}
+
+
+
+
+
+
+
+

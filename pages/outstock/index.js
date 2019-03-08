@@ -1,4 +1,4 @@
-// pages/outstock/index.js
+import { outList} from '../../api/api.js'
 Page({
 
   /**
@@ -6,23 +6,39 @@ Page({
    */
   data: {
     filter: false,
-    mode: ['未出库', '差异', '已出库'],
-    list: [
-      { mode: 0, no: 'DO0000', line: '线路1', time: '2015-02-04', sku: 12 },
-      { mode: 1, no: 'D11111', line: '线路2', time: '2029-14-18', sku: 4 },
-      { mode: 2, no: 'D22222', line: '线路3', time: '2019-12-23', sku: 53 },
-      { mode: 1, no: 'D33333', line: '线路4', time: '2019-02-12', sku: 22 },
-      { mode: 2, no: 'D22222', line: '线路3', time: '2019-12-23', sku: 53 },
-      { mode: 0, no: 'D88888', line: '线路14', time: '2018-08-18', sku: 8 },
-      { mode: 2, no: 'D44444', line: '线路5', time: '2011-03-11', sku: 3 }
-    ]
+    mode: ['未出库', '已出库', '差异'],
+    userinfo: {},
+    pageindex: 1,
+    pagesize: 10,
+    outList: []
   },
-
+  getOutList() {
+    let data = {
+      sysCode: this.data.userinfo.sysCode,
+      deptId: this.data.userinfo.id,
+      outStatus: '',
+      routeId: '',
+      created: '',
+      pageIndex: this.data.pageindex,
+      pageSize: this.data.pagesize
+    }
+    outList(data).then(res => {
+      if (res.status === 200) {
+        this.setData({
+          outList: res.data.records
+        })
+        console.log(this.data.outList)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      userinfo: wx.getStorageSync('userinfo')
+    })
+    this.getOutList()
   },
 
   /**
@@ -36,50 +52,29 @@ Page({
       filter: !this.data.filter
     })
   },
-  handleBtnClick() {
-    wx.navigateTo({
-      url: '../goodsmode/index?mode=2',
-    })
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  handleItemClick(e) {
+    let mode = parseInt(e.currentTarget.dataset.mode)
+    let item = this.data.outList[e.currentTarget.dataset.key]
 
-  },
+    let sysCode = this.data.userinfo.sysCode
+    let { routeId, routeName, supplierId, supplierName, orderNo, skuNum, created } = item
+    switch(mode) {
+      case 1:
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+      break;
+      case 0:
+      case 2:
+        wx.navigateTo({
+          url: `../goodsmode/index?mode=2&sysCode=${sysCode}&deptId=${routeId}&deptName=${routeName}&supplierId=${supplierId}&supplierName=${supplierName}&originalNo=${orderNo}&skuNum=${skuNum}&created=${created}`
+        })
+      break;
+    }
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
   }
 })

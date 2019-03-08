@@ -1,7 +1,7 @@
 <view class="container">
   <view class='userinfo'>
     <image class='avatar' src=''></image>
-    <view class='name'>工作人员：张三</view>
+    <view class='name'>工作人员：{{userinfo.name}}</view>
   </view>
   <view class='info'>
     <view class='col-2'>

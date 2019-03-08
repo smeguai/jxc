@@ -5,139 +5,92 @@
   </view>
   <view class='menu-wrapper'>
     <view class='mode'>全部</view>
-    <view class='menu'>
+    <view class='menu' bindtap='handleFilterClick'>
       <image class='icon' src='../../static/img/u135.png'></image>
       <text class='txt'>筛选</text>
     </view>
   </view>
   <view class='list'>
-    <view class='item'>
+    <view class='item' bindtap='handleItemClick' wx:for='{{orderlist}}' data-idx='{{index}}' wx:key='{{index}}'>
       <view class='blo'>
-        <view class='barcode'>条码：1234567890</view>
-        <view class='status1'>未盘</view>
+        <view class='barcode'>条码：{{item.itemSubno}}</view>
+        <view class='status1'>{{checkstatus[item.checkStatus]}}</view>
       </view>
-      <view class='name'>越南甜心芒果新鲜当季水果</view>
+      <view class='name'>{{item.itemName}}</view>
       <view class='blo'>
-        <view class='clo-3'>单位：斤</view>
-        <view class='clo-3'>规格：100斤/箱</view>
+        <view class='clo-3'>单位：{{item.itemUnit}}</view>
+        <view class='clo-3'>规格：{{item.itemSize}}</view>
         <view class='clo-3 textright'>
           <text class='txt'>库存：</text>
-          <text class='colorred'>500</text>
-          <text class='colorblack'>斤</text>
+          <text class='colorred'>{{item.itemNum}}</text>
+          <text class='colorblack'>{{item.itemUnit}}</text>
         </view>
       </view>
       <view class='sec'>
-        <view class='inf'>
-          <view class='txt'>上次盘点时间：2019-01-30</view>
-          <view class='txt'>上次盘点人：张三</view>
-        </view>
-        <view class='btn mode1'>盘点</view>
-        <!-- <view class=''>重盘</view> -->
-      </view>
-    </view>
-    <view class='item'>
-      <view class='blo'>
-        <view class='barcode'>条码：1234567890</view>
-        <view class='status2'>已盘点</view>
-      </view>
-      <view class='name'>越南甜心芒果新鲜当季水果</view>
-      <view class='blo'>
-        <view class='clo-3'>单位：斤</view>
-        <view class='clo-3'>规格：100斤/箱</view>
-        <view class='clo-3 textright'>
-          <text class='txt'>库存：</text>
-          <text class='colorred'>500</text>
-          <text class='colorblack'>斤</text>
-        </view>
-        <view class='clo-3'>盘点：<text class='colorblack'>600斤</text></view>
-        <view class='clo-3'>差异：<text class='colorred'>600</text><text class='colorblack'>斤</text></view>
-        <view class='clo-3 mode1'>差异</view>
-      </view>
-      <view class='sec'>
-        <view class='inf'>
-          <view class='txt'>上次盘点时间：2019-01-30</view>
-          <view class='txt'>上次盘点人：张三</view>
-        </view>
-        <view class='{{mode === 1?"btn ":"btn mode2"}}'>盘点</view>
-      </view>
-    </view>
-    <view class='item'>
-      <view class='blo'>
-        <view class='barcode'>条码：1234567890</view>
-        <!-- <view class='status1'>已盘点</view> -->
-        <view class='status2'>已盘点</view>
-      </view>
-      <view class='name'>越南甜心芒果新鲜当季水果</view>
-      <view class='blo'>
-        <view class='clo-3'>单位：斤</view>
-        <view class='clo-3'>规格：100斤/箱</view>
-        <view class='clo-3 textright'>
-          <text class='txt'>库存：</text>
-          <text class='colorblack'>500斤</text>
-        </view>
-        <view class='clo-3'>盘点：<text class='colorblack'>600斤</text></view>
-        <view class='clo-3'></view>
-        <view class='clo-3 mode2'>正常</view>
-      </view>
-      <view class='sec'>
-        <view class='inf'>
-          <view class='txt'>上次盘点时间：2019-01-30</view>
-          <view class='txt'>上次盘点人：张三</view>
-        </view>
-        <view class='btn'>重盘</view>
+        <view class='inf'></view>
+        <view class='btn mode1' wx:if='{{item.checkStatus==0}}'>盘点</view>
+        <view class='btn mode2' wx:if='{{item.checkStatus==1}}'>重盘</view>
       </view>
     </view>
   </view>
 
-  <view class='popmasker'>
+  <view class='popmasker' wx:if='{{popmasker}}'>
     <view class='main'>
-      <view class='row'>条码：1234567890</view>
+      <view class='row'>条码：{{clickItem.itemSubno}}</view>
       <view class='row'>
-        <view>越南甜心芒果新鲜当季水果</view>
-        <!-- <input class='iptname' placeholder='越南甜心芒果新鲜当季水果'></input> -->
-        <image class='icon' src='../../static/img/u2547.png'></image>
-      </view>
-      <view class='row'>
-        <view class='txt-2'>上次盘点时间：2019-01-30</view>
-        <view class='txt-2'>上次盘点人：张三</view>
+        <view>{{clickItem.itemName}}</view>
       </view>
       <view class='row'>
         <view class='inf-2'>
-          <text class='name'>盘点人：李四</text>
-          <image class='icon' src='../../static/img/u2547.png'></image>
+          <text class='name'>盘点人：</text>
+          <input placeholder='请输入盘点人' bindblur='checkeriptblur' class='ipt'></input>
         </view>
-        <view class='inf-2'>单位：斤</view>
+        <view class='inf-2'>单位：{{clickItem.itemUnit}}</view>
       </view>
       <view class='row'>
         <view class='inf-2'>规格：100斤/箱</view>
-        <view class='inf-2'>库存：500</view>
+        <view class='inf-2'>库存：{{clickItem.itemNum}}</view>
       </view>
       <view class='row'>
-        <view class='txt'>盘点数量：<text class='num'>500</text></view>
+        <view class='txt'>盘点数量：<text class='num'>{{checknumber}}</text></view>
       </view>
-      <view class='btn'>确定</view>
-      <input class='numipt' placeholder='请输入盘点数量'></input>
+      <view class='btn' bindtap='handleSubmitClick'>确定</view>
+      <input class='numipt' value='{{numipt}}' placeholder='请输入盘点数量'></input>
       <view class='mouse-wrapper'>
         <view class='number'>
-          <view class='text' data-number='1'>1</view>
-          <view class='text' data-number='1'>2</view>
-          <view class='text' data-number='1'>3</view>
-          <view class='text' data-number='1'>4</view>
-          <view class='text' data-number='1'>5</view>
-          <view class='text' data-number='1'>6</view>
-          <view class='text' data-number='1'>7</view>
-          <view class='text' data-number='1'>8</view>
-          <view class='text' data-number='1'>9</view>
+          <view class='text' data-number='1' bindtap='handleNumberClick'>1</view>
+          <view class='text' data-number='2' bindtap='handleNumberClick'>2</view>
+          <view class='text' data-number='3' bindtap='handleNumberClick'>3</view>
+          <view class='text' data-number='4' bindtap='handleNumberClick'>4</view>
+          <view class='text' data-number='5' bindtap='handleNumberClick'>5</view>
+          <view class='text' data-number='6' bindtap='handleNumberClick'>6</view>
+          <view class='text' data-number='7' bindtap='handleNumberClick'>7</view>
+          <view class='text' data-number='8' bindtap='handleNumberClick'>8</view>
+          <view class='text' data-number='9' bindtap='handleNumberClick'>9</view>
           <view class='text'>.</view>
-          <view class='text' data-number='1'>0</view>
+          <view class='text' data-number='0' bindtap='handleNumberClick'>0</view>
           <view class='text'>+</view>
         </view>
         <view class='operation'>
-          <view class='reset'>重置</view>
-          <view class='confirm'>确定</view>
+          <view class='reset' bindtap='handleResetClick'>重置</view>
+          <view class='confirm' bindtap='handleConfirmClick'>确定</view>
         </view>
       </view>
     </view>
   </view>
-
+  <view class='filter-wrapper' wx:if='{{filter}}'>
+    <view class='mask' bindtap='handleFilterClick'></view>
+    <view class='filter'>
+      <view class='tit'>状态</view>
+      <view class='status'>
+        <view class='{{purStatus=="" ? "item active": "item"}}' bindtap='Statustoogle' data-idx=''>全部</view>
+        <view class='{{purStatus=="0" ? "item active": "item"}}' bindtap='Statustoogle' data-idx='0'>未收货</view>
+        <view class='{{purStatus=="2" ? "item active": "item"}}' bindtap='Statustoogle' data-idx='2'>差异</view>
+        <view class='{{purStatus=="1" ? "item active": "item"}}' bindtap='Statustoogle' data-idx='1'>已收货</view> 
+      </view>
+      <view class='tit'>商品类别</view>
+      <picker bindchange='bindsupplierChange' mode='selector' valule='{{index}}' range='{{catelist}}' class='pricker' range-key='itemClsname'>{{cate}}</picker>
+      <view class='btn' bindtap='handleCateC'>确定</view>
+    </view>
+  </view>
 </view>
