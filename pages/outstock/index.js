@@ -1,4 +1,4 @@
-import { outList} from '../../api/api.js'
+import { outList, getRoute} from '../../api/api.js'
 Page({
 
   /**
@@ -10,7 +10,8 @@ Page({
     userinfo: {},
     pageindex: 1,
     pagesize: 10,
-    outList: []
+    outList: [],
+    date: '请选择'
   },
   getOutList() {
     let data = {
@@ -29,6 +30,14 @@ Page({
         })
         console.log(this.data.outList)
       }
+    })
+  },
+  getRoute() {
+    let data = {
+      deptId: wx.getStorageSync('userinfo').id
+    }
+    getRoute().then(res => {
+
     })
   },
   /**
@@ -55,9 +64,8 @@ Page({
   handleItemClick(e) {
     let mode = parseInt(e.currentTarget.dataset.mode)
     let item = this.data.outList[e.currentTarget.dataset.key]
-
     let sysCode = this.data.userinfo.sysCode
-    let { routeId, routeName, supplierId, supplierName, orderNo, skuNum, created } = item
+    let { created, deptId, deptName, skuNum, outStatus, orderNo, routeId, routeName } = item
     switch(mode) {
       case 1:
 
@@ -65,12 +73,16 @@ Page({
       case 0:
       case 2:
         wx.navigateTo({
-          url: `../goodsmode/index?mode=2&sysCode=${sysCode}&deptId=${routeId}&deptName=${routeName}&supplierId=${supplierId}&supplierName=${supplierName}&originalNo=${orderNo}&skuNum=${skuNum}&created=${created}`
+          url: `../goodsmode/index?stockMode=2&sysCode=${sysCode}&created=${created}&deptId=${deptId}&deptName=${deptName}&skuNum=${skuNum}&outStatus=${outStatus}&orderNo=${orderNo}&routeId=${routeId}&routeName=${routeName}`
         })
       break;
     }
   },
-
+  datechange(e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
   /**
    * 页面上拉触底事件的处理函数
    */

@@ -1,71 +1,70 @@
 <view class='container'>
   <view class='top'>
-    <view class='no'>单号：DO1234567890</view>
-    <picker class='picker'>
-      <text class='txt'>请选择供应商名称</text>
+    <picker class='picker' moded='selector' bindchange='bindsupplierChange' range='{{SupplierList}}' range-key='supplierName'>
+      <text class='txt'>{{getSupplierTXT}}</text>
       <image class='icon' src='../../static/img/u171.png'></image>
     </picker>
-    <view class='addgoods'>
+    <view class='addgoods' bindtap='handleMaskerToggle'>
       <image class='icon' src='../../static/img/u185.png'></image>
       <view class='txt'>添加商品</view>
     </view>
     <view class='sec'>
       <view class='title'>商品</view>
-      <view class='sku'>sku数量：<text class='txt'>4</text></view>
+      <view class='sku'>sku数量：<text class='txt'>{{addList.length}}</text></view>
     </view>
   </view>
   <view class='list-wrapper'>
-    <view class='item'>
-      <view class='no'>商品条码：1234567890123456</view>
-      <view class='name'>越南甜心芒果新鲜当季水果</view>
+    <view class='item' wx:for='{{addList}}'>
+      <view class='no'>商品条码：{{item.itemSubno}}</view>
+      <view class='name'>{{item.itemName}}</view>
       <view class='desc'>
-        <view class='txt'>单位：斤</view>
-        <view class='txt'>规格：10斤/箱</view>
-        <view class='txt'>价格：10元/斤</view>
+        <view class='txt'>单位：{{item.itemUnit}}</view>
+        <view class='txt'>规格：{{item.itemSizeDes}}</view>
+        <view class='txt'>价格：{{item.itemCostPrice}}</view>
         <view class='txt'>数量：<text class='num'>500</text>斤</view>
       </view>
     </view>
   </view>
 
-  <view class='confirm'>确定</view>
+  <view class='confirm' bindtap='submitList'>确定</view>
 
-  <view class='masker'>
+  <view class='masker' wx:if='{{maskerShow}}'>
     <view class='addgoods'>
       <view class='headline'>添加商品</view>
       <view class='ipt-wrapper'>
-        <input class='ipt' placeholder='请输入商品条码'></input>
+        <input class='ipt' placeholder='请输入商品条码' bindconfirm='search_iptenter' data-mode='1' value='{{goodslist_active.itemSubno}}'></input>
         <image class='qrcode' src='../../static/img/u256.png'></image>
       </view>
       <view class='ipt-wrapper'>
-        <input class='ipt' placeholder='请输入商品名称'></input>
-        <image class='list' src='../../static/img/u259.png'></image>
+        <input class='ipt' placeholder='请输入商品名称' bindconfirm='search_iptenter' data-mode='2' value='{{goodslist_active.itemName}}'></input>
+        <image class='list' bindtap='handlegoodslistClick' src='../../static/img/u259.png'></image>
       </view>
       <view class='row'>
         <view class='item'>
           <view class='txt'>商品单位：</view>
-          <input class='ipt' placeholder='斤'></input>
+          <input class='ipt' disabled value='{{goodslist_active.itemUnit}}'></input>
         </view>
         <view class='item'>
           <view class='txt'>商品规格：</view>
-          <input class='ipt' placeholder='10斤/箱'></input>
+          <input class='ipt' disabled value='{{goodslist_active.itemSize}}'></input>
         </view>
         <view class='item'>
           <view class='txt'>采购数量：</view>
-          <input class='ipt' placeholder='500斤'></input>
+          <input class='ipt' bindconfirm='purNum'></input>
         </view>
         <view class='item'>
           <view class='txt'>商品价格：</view>
-          <input class='ipt' placeholder='20元/斤'></input>
+          <input class='ipt' disabled value='{{goodslist_active.itemCostPrice}}'></input>
         </view>
       </view>
       <view class='btns'>
-        <view class='cancel'>取消</view>
-        <view class='submit'>提交</view>
+        <view class='cancel' bindtap='handleMaskerToggle'>取消</view>
+        <view class='submit' bindtap='handleMaskerToggle'>提交</view>
       </view>
     </view>
   </view>
 
-  <view class='goodslistmask'>
+  <view class='goodslistmask' wx:if='{{goodslistmaskShow}}'>
     <view class='main'>
       <view class='headline'>商品信息</view>
       <view class='headertb'>
@@ -75,13 +74,14 @@
         <view class='txt'>价格</view>
         <view class='txt'>条码</view>
       </view>
-      <view class='item'>
-        <view class='name txt'>越南甜心芒果新鲜当季水果</view>
-        <view class='txt'>箱</view>
-        <view class='txt'>100斤/箱</view>
-        <view class='txt'>10元/斤</view>
-        <view class='txt'>1234567890</view>
+      <view class='item' wx:for='{{goodslist}}' data-item='{{item}}' bindtap='goodsItemClick'>
+        <view class='name txt'>{{item.itemName}}</view>
+        <view class='txt'>{{item.itemUnit}}</view>
+        <view class='txt'>{{item.itemSizeDes}}</view>
+        <view class='txt'>{{item.itemNowPrice}}元/{{item.itemUnit}}</view>
+        <view class='txt'>{{item.itemSubno}}</view>
       </view>
+      <view class='btn' bindtap='handlegoodsMaskerToggle'>确定</view>
     </view>
   </view>
 

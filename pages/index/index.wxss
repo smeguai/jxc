@@ -2,7 +2,31 @@
   background: #f2f2f2;
   min-height: 100vh;
 }
-.container .txt {
+.container .picker {
+  display: flex;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  background: #fff;
+  height: 100rpx;
+  align-items: center;
+  justify-content: space-between;
+}
+.container .picker .icon1 {
+  width: 32rpx;
+  height: 32rpx;
+}
+.container .picker .icon2 {
+  width: 24rpx;
+  height: 14rpx;
+}
+.container .picker .txt {
+  flex: 1;
+  font-size: 28rpx;
+  color: #999;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.container .info .txt {
   font-size: 36rpx;
   color: #3E3A39;
 }

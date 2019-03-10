@@ -38,9 +38,7 @@ Page({
       if (res.status === 200) {
         let userinfo = {
           sysCode: res.data.sysUser.sysCode,
-          name: res.data.sysUser.name,
-          id: res.data.depts[0].id,
-          simplename: res.data.depts[0].simplename
+          name: res.data.sysUser.name
         }
         wx.setStorage({
           key: 'userinfo',
@@ -51,6 +49,7 @@ Page({
             })
           }
         })
+        wx.setStorageSync('gys', res.data.depts)
       } else {
         wx.showToast({
           title: res.msg,

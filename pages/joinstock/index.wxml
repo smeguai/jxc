@@ -1,6 +1,6 @@
 <view class='container'>
   <view class='addorder'>
-    <navigator url='../addorder/index' class='btn'>
+    <navigator url='../addorder/index' hover-class='none' class='btn'>
       <image class='icon' src='../../static/img/u96.png'></image>
       <view class='txt'>添加采购单</view>
     </navigator>
@@ -48,10 +48,10 @@
         <view class='{{purStatus=="1" ? "item active": "item"}}' bindtap='Statustoogle' data-idx='1'>已收货</view> 
       </view>
       <view class='tit'>供应商</view>
-      <picker bindchange='bindsupplierChange' mode='selector' valule='{{index}}' range='{{supplierList}}' class='pricker' range-key='supplierName'>{{supplierList[supplierId].supplierName}}</picker>
+      <picker bindchange='bindsupplierChange' mode='selector' valule='{{index}}' range='{{supplierList}}' class='pricker' range-key='supplierName'>{{supplierList[supplierId].supplierName || "请选择"}}</picker>
       <view class='tit'>时间</view>
-      <picker bindchange='bindDateChange' mode='date' class='pricker'>{{createDate}}</picker>
-      <view class='btn' bindtap='handleConfirmClick'>确定</view>
+      <picker bindchange='bindDateChange' mode='date' class='pricker'>{{createDate || "请选择"}}</picker>
+      <view class='btn' bindtap='filterPurList'>确定</view>
     </view>
   </view>
 </view> 

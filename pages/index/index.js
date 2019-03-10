@@ -1,26 +1,26 @@
-//index.js
-//获取应用实例
-const app = getApp()
 import {login} from '../../api/api'
 Page({
   data: {
-    userinfo: null
+    userinfo: null,
+    gys: null,
+    gysTXT: null
   },
   onLoad: function () {
-    this.getUserInfo()
+    this.setData({
+      userinfo: wx.getStorageSync('userinfo'),
+      gys: wx.getStorageSync('gys')
+    })
   },
-  onShow() {
-    
-  },
-  getUserInfo() {
-    wx.getStorage({
-      key: 'userinfo',
-      success: (res) => {
-        this.setData({
-          userinfo: res.data
-        })
-        console.log(this.data.userinfo)
-      }
+  changeGYS(e) {
+    let data = {
+      name: this.data.userinfo.name,
+      sysCode: this.data.userinfo.sysCode,
+      id: this.data.gys[e.detail.value].id,
+      simplename: this.data.gys[e.detail.value].simplename
+    }
+    wx.setStorageSync('userinfo', data)
+    this.setData({
+      gysTXT: this.data.gys[e.detail.value].simplename
     })
   }
 })

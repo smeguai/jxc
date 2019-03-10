@@ -7,22 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    filter: false,
-    pageSize: 10,
-    pageIndex: 1,
-    createTime: '',
+    condition: '',
     userinfo: null,
-
-
     createDate: '',
     purStatus: '',
     supplierId: '',
     supplierList: [],
     purList: [],
-
-
+    pageSize: 10,
+    pageIndex: 1,
+    //  init
     _Type: ['手工录入', '自动生成'],
-    _Status: ['未收货', '已收货', '差异']
+    _Status: ['未收货', '已收货', '差异'],
+    filter: false
   },
   getSupplier() {
     this.setData({
@@ -44,17 +41,16 @@ Page({
   onLoad: function (options) {
     this.getSupplier()
     this.handleConfirmClick()
-    // this.setData({
-    //   createDate: getNowFormatDate()
-    // })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  filterPurList() {
+    this.setData({
+      pageIndex: 1,
+      pageSize: 10,
+      purList: []
+    })
+    this.handleConfirmClick()
+    this.handleFilterClick()
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -70,13 +66,13 @@ Page({
     let index = e.detail.value
     let currentId = this.data.supplierList[index].id
     this.setData({
-      supplierId: e.detail.value
+      supplierId: e.detail.value,
+      condition: this.data.supplierList[index].supplierName
     })
   },
   bindDateChange(e) {
-    let d = new Date(e.detail.value)
+    let d = new Date()
     this.setData({
-      createTime: d.getTime(),
       createDate: e.detail.value
     })
   },
@@ -87,13 +83,13 @@ Page({
       deptId: this.data.userinfo.id,
       created: this.data.createDate,
       pageIndex: this.data.pageIndex,
-      pageSize: this.data.pageSize
+      pageSize: this.data.pageSize,
+      condition: this.data.condition
     }
     purList(data).then(res => {
-      console.log(res)
       if (res.status === 200) {
         this.setData({
-          purList: res.data.records
+          purList: [...this.data.purList, ...res.data.records]
         })
       }
     })
@@ -106,8 +102,6 @@ Page({
   handleItemClick(e) {
     let mode = parseInt(e.currentTarget.dataset.mode)
     let item = this.data.purList[e.currentTarget.dataset.key]
-
-
     let sysCode = this.data.userinfo.sysCode
     let { deptId, deptName, supplierId, supplierName, orderNo, skuNum, created} = item
     switch (mode) {
@@ -116,43 +110,15 @@ Page({
       case 0:
       case 2:
         wx.navigateTo({
-          url: `../goodsmode/index?mode=1&sysCode=${sysCode}&deptId=${deptId}&deptName=${deptName}&supplierId=${supplierId}&supplierName=${supplierName}&originalNo=${orderNo}&skuNum=${skuNum}&created=${created}`
+          url: `../goodsmode/index?stockMode=1&sysCode=${sysCode}&deptId=${deptId}&deptName=${deptName}&supplierId=${supplierId}&supplierName=${supplierName}&orderNo=${orderNo}&skuNum=${skuNum}&created=${created}`
         })
       break;
     }
   },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    this.setData({
+      pageIndex: this.data.pageIndex + 1
+    })
+    this.handleConfirmClick()
   }
 })

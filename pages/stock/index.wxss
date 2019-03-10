@@ -266,7 +266,9 @@
 .container .filter-wrapper .status {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  box-sizing: border-box;
 }
 .container .filter-wrapper .status .item {
   width: 286rpx;

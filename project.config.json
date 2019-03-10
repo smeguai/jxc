@@ -37,13 +37,20 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "sign in",
 					"pathName": "pages/signin/index",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "goods detail",
+					"pathName": "pages/goodsmode/index",
+					"query": "created=2019-03-07 17:18:11.0&deptId=35&deptName=河北顿洁石家庄配送中心&mode=1&originalNo=PO903076854061&skuNum=23&supplierId=13&supplierName=顿洁云仓&sysCode=6",
 					"scene": null
 				}
 			]

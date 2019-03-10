@@ -17,22 +17,37 @@ Page({
     orderlist: [],
     checkstatus: ['未盘点', '已盘点'],
     checker: '',
-    clickItem: null
+    clickItem: null,
+    notRequires: false,
+    //  0 未盘点 1 已盘点
+    checker_mode: ''
+  },
+  Statustoogle(e) {
+    this.setData({
+        checker_mode: e.currentTarget.dataset.idx
+    })
   },
   getcheckList() {
     let data = {
       deptId: this.data.userinfo.id,
       itemName: '',
       itemSubno: '',
-      checkStatus: '',
-      itemType: '',
+      checkStatus: this.data.checker_mode,
+      itemType: this.data.cate == "请选择" || this.data.cate == "全部" ? "" : this.data.cate,
       pageIndex: this.data.pageindex,
       pageSize: this.data.pagesize
     }
     checkList(data).then(res => {
       if (res.status === 200) {
+        if (!res.data) {
+          this.setData({
+            orderlist: []
+          })
+          return
+        }
         this.setData({
-          orderlist: res.data.data
+          orderlist: res.data.data,
+          notRequires: res.data.total >= 10 ? false : true
         })
       }
     })
@@ -44,7 +59,6 @@ Page({
   },
   handleSubmitClick() {
     let item = this.data.clickItem
-    console.log(item)
     let data = {
       sysCode: this.data.userinfo.sysCode,
 	    deptId: this.data.userinfo.id,
@@ -69,7 +83,7 @@ Page({
     getItemCls().then(res => {
       if (res.status===200) {
         this.setData({
-          catelist: res.data
+          catelist: [{ itemClsname: '全部'}, ...res.data]
         })
       }
     })
@@ -80,6 +94,9 @@ Page({
     })
   },
   handleCateClick() {
+    this.setData({
+      pageIndex: 1
+    })
     this.getcheckList()
   },
   handleItemClick(e) {
@@ -99,19 +116,6 @@ Page({
     })
     this.getItemCls()
     this.getcheckList()
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
   },
   handleFilterClick() {
     this.setData({
@@ -148,38 +152,11 @@ Page({
       popmasker: !this.data.popmasker
     })
   },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    if (this.data.notRequires) return
+    this.setData({
+      pageIndex: this.data.pageIndex + 1
+    })
+    this.getcheckList()
   }
 })

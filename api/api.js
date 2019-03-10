@@ -24,6 +24,12 @@ export function getSupplier(data) {
   })
 }
 //  完成入库
+export function getRoute(data) {
+  return https('/Invoicing/getRoute', data).then(res => {
+    return res.data
+  })
+}
+//  完成线路
 export function saveDI(data) {
   return https('/Invoicing/saveDI', data).then(res => {
     return res.data
@@ -68,6 +74,12 @@ export function addPur(data) {
 //  盘点
 export function check(data) {
   return https('/Invoicing/check', data).then(res => {
+    return res.data
+  })
+}
+//  完成入库
+export function saveDO(data) {
+  return https('/Invoicing/saveDO', data).then(res => {
     return res.data
   })
 }

@@ -41,7 +41,7 @@
       <view class='tit'>线路</view>
       <picker mode='selector' range='{{[1,2,3,4]}}' class='pricker'>100001</picker>
       <view class='tit'>时间</view>
-      <picker mode='selector' range='{{[1,2,3,4]}}' class='pricker'>2019-02-18</picker>
+      <picker mode='date' class='pricker' bindchange='datechange'>{{date}}</picker>
       <view class='btn'>确定</view>
     </view>
   </view>

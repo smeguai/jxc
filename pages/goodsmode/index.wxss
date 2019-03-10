@@ -77,8 +77,9 @@
   font-size: 28rpx;
 }
 .container .tab-wrapper {
-  background: #f2f2f2;
+  background: #fff;
   font-size: 32rpx;
+  margin: 16rpx 0;
   display: flex;
   padding: 0 20rpx;
   justify-content: center;

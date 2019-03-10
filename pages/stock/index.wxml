@@ -83,14 +83,13 @@
     <view class='filter'>
       <view class='tit'>状态</view>
       <view class='status'>
-        <view class='{{purStatus=="" ? "item active": "item"}}' bindtap='Statustoogle' data-idx=''>全部</view>
-        <view class='{{purStatus=="0" ? "item active": "item"}}' bindtap='Statustoogle' data-idx='0'>未收货</view>
-        <view class='{{purStatus=="2" ? "item active": "item"}}' bindtap='Statustoogle' data-idx='2'>差异</view>
-        <view class='{{purStatus=="1" ? "item active": "item"}}' bindtap='Statustoogle' data-idx='1'>已收货</view> 
+        <view class='{{checker_mode=="" ? "item active": "item"}}' bindtap='Statustoogle' data-idx=''>全部</view>
+        <view class='{{checker_mode=="0" ? "item active": "item"}}' bindtap='Statustoogle' data-idx='0'>未盘点</view>
+        <view class='{{checker_mode=="1" ? "item active": "item"}}' bindtap='Statustoogle' data-idx='1'>已盘点</view> 
       </view>
       <view class='tit'>商品类别</view>
       <picker bindchange='bindsupplierChange' mode='selector' valule='{{index}}' range='{{catelist}}' class='pricker' range-key='itemClsname'>{{cate}}</picker>
-      <view class='btn' bindtap='handleCateC'>确定</view>
+      <view class='btn' bindtap='handleCateClick'>确定</view>
     </view>
   </view>
 </view>
