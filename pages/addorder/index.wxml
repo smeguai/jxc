@@ -26,17 +26,17 @@
     </view>
   </view>
 
-  <view class='confirm' bindtap='submitList'>确定</view>
+  <view class='confirm' hidden='{{addList.length==0}}' bindtap='submitList'>确定</view>
 
   <view class='masker' wx:if='{{maskerShow}}'>
     <view class='addgoods'>
       <view class='headline'>添加商品</view>
       <view class='ipt-wrapper'>
-        <input class='ipt' placeholder='请输入商品条码' bindconfirm='search_iptenter' data-mode='1' value='{{goodslist_active.itemSubno}}'></input>
-        <image class='qrcode' src='../../static/img/u256.png'></image>
+        <input class='ipt' placeholder='请输入商品条码' bindconfirm='search_iptenter' value='{{goodslist_active.itemSubno}}'></input>
+        <image bindtap='handleScancodeClick' class='qrcode' src='../../static/img/u256.png'></image>
       </view>
       <view class='ipt-wrapper'>
-        <input class='ipt' placeholder='请输入商品名称' bindconfirm='search_iptenter' data-mode='2' value='{{goodslist_active.itemName}}'></input>
+        <input class='ipt' placeholder='请输入商品名称' bindconfirm='search_iptenter' value='{{goodslist_active.itemName}}'></input>
         <image class='list' bindtap='handlegoodslistClick' src='../../static/img/u259.png'></image>
       </view>
       <view class='row'>
@@ -59,7 +59,7 @@
       </view>
       <view class='btns'>
         <view class='cancel' bindtap='handleMaskerToggle'>取消</view>
-        <view class='submit' bindtap='handleMaskerToggle'>提交</view>
+        <view class='submit' bindtap='handleAddItemClick'>提交</view>
       </view>
     </view>
   </view>
@@ -74,14 +74,17 @@
         <view class='txt'>价格</view>
         <view class='txt'>条码</view>
       </view>
-      <view class='item' wx:for='{{goodslist}}' data-item='{{item}}' bindtap='goodsItemClick'>
-        <view class='name txt'>{{item.itemName}}</view>
-        <view class='txt'>{{item.itemUnit}}</view>
-        <view class='txt'>{{item.itemSizeDes}}</view>
-        <view class='txt'>{{item.itemNowPrice}}元/{{item.itemUnit}}</view>
-        <view class='txt'>{{item.itemSubno}}</view>
-      </view>
-      <view class='btn' bindtap='handlegoodsMaskerToggle'>确定</view>
+      
+      <scroll-view class='scroll' lower-threshold='0' scroll-y bindscrolltolower='scrollReachBottom'>
+        <view class='item' wx:for='{{goodslist}}' data-item='{{item}}' bindtap='goodsItemClick'>
+          <view class='name txt'>{{item.itemName}}</view>
+          <view class='txt'>{{item.itemUnit}}</view>
+          <view class='txt'>{{item.itemSizeDes}}</view>
+          <view class='txt'>{{item.itemNowPrice}}元/{{item.itemUnit}}</view>
+          <view class='txt'>{{item.itemSubno}}</view>
+        </view>
+      </scroll-view>
+      <view class='btn' bindtap='handlegoodsMaskerToggle'>取消</view>
     </view>
   </view>
 

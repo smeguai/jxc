@@ -12,18 +12,45 @@ Page({
     userinfo: null,
     SupplierList: [],
 
-    goodslist: [],
+    goodslist: [{a: 1}],
     pageindex: 1,
-    pagesize: 100,
-    itemSubno: '',
-    itemName: '',
+    pagesize: 20,
     goodslist_active:null,
     purNum: 0,
-    addList: []
+    addList: [],
+    timer: null
+  },
+  scrollReachBottom() {
+    clearTimeout(this.data.timer)
+    let t = setTimeout(() => {
+      this.getitemQuery()
+    }, 400)
+    this.setData({
+      timer: t
+    })
   },
   handleMaskerToggle() {
     this.setData({
       maskerShow: !this.data.maskerShow
+    })
+  },
+  handleScancodeClick() {
+    wx.scanCode({
+      success: (res) => {
+        this.setData({
+          pageindex: 1,
+          goodslist: [],
+          condition: res.result
+        })
+        this.getitemQuery()
+        this.handlegoodsMaskerToggle()
+      },
+      fail: (err) => {
+        wx.showToast({
+          title: '扫描失败',
+          icon: 'none'
+        })
+      }
     })
   },
   handlegoodsMaskerToggle() {
@@ -43,9 +70,17 @@ Page({
     })
   },
   bindsupplierChange(e) {
+    let supplier = {
+      txt: this.data.SupplierList[e.detail.value].supplierName,
+      id : this.data.SupplierList[e.detail.value].id
+    }
     this.setData({
-      getSupplierTXT: this.data.SupplierList[e.detail.value].supplierName,
-      getSupplierID: this.data.SupplierList[e.detail.value].id
+      getSupplierTXT: supplier.txt,
+      getSupplierID: supplier.id
+    })
+    wx:wx.setStorage({
+      key: 'supplier',
+      data: supplier
     })
   },
   handlegoodslistClick() {
@@ -53,16 +88,8 @@ Page({
     this.handlegoodsMaskerToggle()
   },
   search_iptenter(e) {
-    let mode = e.currentTarget.dataset.mode
-    let t = '',n = ''
-    if (mode==1) {
-      t = e.detail.value
-    } else {
-      n = e.detail.value
-    }
     this.setData({
-      itemSubno: t,
-      itemName: n
+      condition: e.detail.value
     })
     if (this.data.goodslist) {
       this.getitemQuery()
@@ -70,9 +97,11 @@ Page({
     }
   },
   getitemQuery() {
+    wx.showLoading({
+      title: '加载中...'
+    })
     let data = {
-      itemSubno: this.data.itemSubno,
-	    itemName: this.data.itemName,
+      condition: this.data.condition,
 	    deptId: this.data.userinfo.id,
 	    pageIndex: this.data.pageindex,
 	    pageSize: this.data.pagesize
@@ -81,37 +110,53 @@ Page({
       if (res.status === 200) {
         if (res.data) {
           this.setData({
-            goodslist: res.data.data
+            goodslist: res.data.data,
+            pageindex: this.data.pageindex + 1
           })
         }
       }
     })
   },
-  goodsItemClick(e) {
-    let item = e.currentTarget.dataset.item
-    let userinfo = this.data.userinfo
-    let data = {
-      sysCode: userinfo.sysCode,
-      deptId: userinfo.id,
-      deptName: userinfo.simplename,
-      supplierId: this.data.getSupplierID,
-      supplierName: this.data.getSupplierTXT,
-      itemId: item.id,
-      itemSubno: item.itemSubno,
-      itemNo: item.itemNo,
-      itemName: item.itemName,
-      itemUnit: item.itemUnit,
-      itemSize: item.itemSize,
-      itemCostPrice: item.itemCostPrice,
-      totalAmt: item.itemCostPrice * this.data.purNum,
-      purNum: this.data.purNum
+  handleAddItemClick() {
+    let item = this.data.goodslist_active
+    if (!item) {
+      wx.showToast({
+        title: '还未录入商品信息',
+        icon: 'none'
+      })
+    } else {
+      let userinfo = this.data.userinfo
+      let data = {
+        sysCode: userinfo.sysCode,
+        deptId: userinfo.id,
+        deptName: userinfo.simplename,
+        supplierId: this.data.getSupplierID,
+        supplierName: this.data.getSupplierTXT,
+        itemId: item.id,
+        itemSubno: item.itemSubno,
+        itemNo: item.itemNo,
+        itemName: item.itemName,
+        itemUnit: item.itemUnit,
+        itemSize: item.itemSize,
+        itemCostPrice: item.itemCostPrice,
+        totalAmt: item.itemCostPrice * this.data.purNum,
+        purNum: this.data.purNum
+      }
+      let addList = [...this.data.addList, data]
+      this.setData({
+        addList,
+        goodslist_active: null
+      })
+      wx.showToast({
+        title: '添加成功！',
+        icon: 'none'
+      })
     }
-    let addList = [...this.data.addList, data]
+  },
+  goodsItemClick(e) {
     this.setData({
-      addList,
-      goodslist_active: item
+        goodslist_active: e.currentTarget.dataset.item
     })
-    this.handlegoodsMaskerToggle()
   },
   purNum(e) {
     this.setData({
@@ -122,17 +167,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.init_supplier()
     this.setData({
       userinfo: wx.getStorageSync('userinfo')
     })
+    
     this.getSupplier()
+  },
+  init_supplier() {
+    let supplier = wx.getStorageSync('supplier')
+    this.setData({
+      getSupplierTXT: supplier.txt,
+      getSupplierID: supplier.id
+    })
   },
   submitList() {
     if (this.data.addList.length == 0) return
     let { sysCode, name, id, simplename } = this.data.userinfo
-    let itemlist = []
+    let itemlist = [], totalAmt = 0
     this.data.addList.map(i => {
-      itemlist.push(JSON.stringify(i))
+      itemlist.push(JSON.stringify(i)),
+      totalAmt += i.totalAmt
     })
     let data = {
       sysCode,
@@ -141,12 +196,11 @@ Page({
       operator: name,
       supplierId: this.data.getSupplierID,
       supplierName: this.data.getSupplierTXT,
-      skuNum: 1,
-      totalAmt: 0,
+      skuNum: this.data.addList.length,
+      totalAmt,
       itemList: '[' + itemlist.toString() + ']'
     }
     addPur(data).then(res => {
-      console.log(res)
       if (res.status === 200) {
         wx.showToast({
           title: '添加成功',

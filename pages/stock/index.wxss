@@ -16,7 +16,7 @@
   line-height: 88rpx;
   border-radius: 16rpx;
   font-size: 28rpx;
-  padding: 0 20rpx;
+  padding: 0 84rpx 0 20rpx;
   box-sizing: border-box;
   background: #fff;
 }
@@ -24,8 +24,9 @@
   width: 44rpx;
   height: 44rpx;
   position: absolute;
-  right: 40rpx;
-  top: 40rpx;
+  right: 20rpx;
+  top: 22rpx;
+  padding: 20rpx;
   z-index: 9;
 }
 

@@ -1,4 +1,5 @@
 import { purDetail, saveDI, saveDO, itemQuery, outDetail } from '../../api/api.js'
+import { get_YHM} from '../../utils/util.js'
 Page({
   data: {
     // init 
@@ -84,6 +85,9 @@ Page({
     })
   },
   getPurDetail() {
+    wx.showLoading({
+      title: '搜索中...',
+    })
     let data = {
       orderNo: this.data.orderNo,
       pageIndex: this.data.pageIndex,
@@ -99,6 +103,9 @@ Page({
     })
   },
   getoutDetail() {
+    wx.showLoading({
+      title: '搜索中',
+    })
     let data = {
       orderNo: this.data.orderNo,
       outStatus: this.data.outStatus,
@@ -177,14 +184,7 @@ Page({
     })
   },
   saveGoods() {
-    if (this.data.t_data == '请选择' || this.data.t_itemNum == '' || this.data.t_expiration_date == '') {
-      console.log(this.data.t_itemNum == '' )
-      wx.showToast({
-        title: '请输入完整信息',
-        icon: 'none'
-      })
-      
-    } else {
+    if (this.data.t_data != '请选择' && this.data.t_itemNum.replace(/(^\s*)|(\s*$)/g, "") && this.data.t_expiration_date.replace(/(^\s*)|(\s*$)/g, "")) {
       this.popMaskerToggle()
       //  检索是否提交过
       let itemList = this.data.itemList
@@ -209,29 +209,6 @@ Page({
       list.map((i, k) => {
         if (i.itemId == this.data.saveDI_KEY) {
           list.splice(k, 1)
-          // let s = {
-          //   sysCode: init_item_data.sysCode,
-          //   deptId: init_item_data.deptId,
-          //   deptName: init_item_data.deptName,
-          //   supplierId: init_item_data.supplierId,
-          //   supplierName: init_item_data.supplierName,
-          //   itemId: i.itemId,
-          //   itemSubno: i.itemSubno,
-          //   itemNo: i.itemNo,
-          //   itemName: i.itemName,
-          //   itemUnit: i.itemUnit,
-          //   itemSize: i.itemSize,
-          //   itemCostPrice: i.itemCostPrice,
-          //   totalAmt: this.data.t_totalAmt,
-          //   itemNum: this.data.t_itemNum,
-          //   productionDate: this.data.t_data,
-          //   expiration_date: this.data.t_expiration_date,
-          //   memo: this.data.t_memo
-          // }
-          // this.setData({
-          //   list,
-          //   itemList: [...this.data.itemList, s]
-          // })
           if (this.data.stockMode == 1) {
             let data = {
               sysCode: init_item_data.sysCode,
@@ -256,7 +233,7 @@ Page({
               list,
               itemList: [...this.data.itemList, data]
             })
-          }else if(this.data.stockMode == 2) {
+          } else if(this.data.stockMode == 2) {
             let data = {
               sysCode: this.data.sysCode,
               deptId: this.data.deptId,
@@ -283,6 +260,11 @@ Page({
             })
           }
         }
+      })
+    } else {
+      wx.showToast({
+        title: '请录入商品信息',
+        icon: 'none'
       })
     }
   },
@@ -347,15 +329,18 @@ Page({
     }
   },
   handleSearchEnter(e) {
-    this.setData({
-      condition: e.detail.value,
-      list: [],
-      pageIndex: 1
-    })
-    if (this.data.stockMode == 1) {
-      this.getPurDetail()
-    } else {
-      this.getoutDetail()
+    let t = e.detail.value.replace(/(^\s*)|(\s*$)/g, "")
+    if (t) {
+      this.setData({
+        condition: t,
+        list: [],
+        pageIndex: 1
+      })
+      if (this.data.stockMode == 1) {
+        this.getPurDetail()
+      } else {
+        this.getoutDetail()
+      }
     }
   },
   onReachBottom() {

@@ -1,18 +1,14 @@
 {
   "pages": [
-    "pages/stock/index",
-    "pages/index/index",
-    "pages/outstock/index",
-    "pages/goodsmode/index",
-
-    
-    "pages/addorder/index",
-    "pages/outofstock/index",
     "pages/joinstock/index",
-    "pages/nooutstock/index",
-    "pages/stockdiff/index",
+    "pages/outofstock/index",
+    "pages/goodsmode/index",
+    "pages/addorder/index",
+    "pages/outstock/index",
+    "pages/index/index",
+    "pages/stock/index",
     "pages/signin/index",
-    "pages/outstockdiff/index"
+    "pages/accomplish/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#37d192",

@@ -1,18 +1,11 @@
-const getNowFormatDate = () => {
+const get_YHM = () => {
   let date = new Date()
-  let seperator = '-'
   let y = date.getFullYear()
-  let m = date.getMonth() + 1
-  let strDate = date.getDate()
-  if (m >= 1 && m <= 9) {
-    m = "0" + m
-  }
-  if (strDate >= 0 && strDate <= 9) {
-    strDate = "0" + strDate
-  }
-  var currentdate = y + seperator + m + seperator + strDate
-  return currentdate
+  let m = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+  let d = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+  let dateStr = `${y}-${m}-${d}`
+  return dateStr
 }
 module.exports = {
-  getNowFormatDate
+  get_YHM
 }

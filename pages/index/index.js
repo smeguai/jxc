@@ -2,8 +2,7 @@ import {login} from '../../api/api'
 Page({
   data: {
     userinfo: null,
-    gys: null,
-    gysTXT: null
+    gys: null
   },
   onLoad: function () {
     this.setData({
@@ -19,8 +18,17 @@ Page({
       simplename: this.data.gys[e.detail.value].simplename
     }
     wx.setStorageSync('userinfo', data)
-    this.setData({
-      gysTXT: this.data.gys[e.detail.value].simplename
-    })
+  },
+  handleNavigateClick(e) {
+    if (this.data.userinfo.id) {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url
+      })
+    } else {
+      wx.showToast({
+        title: '请选择配送中心！',
+        icon: 'none'
+      })
+    }
   }
 })

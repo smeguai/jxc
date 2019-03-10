@@ -1,0 +1,90 @@
+.container {
+  min-height: 100vh;
+  background: #f2f2f2;
+}
+.container .order {
+  background: #fff;
+  padding: 14rpx 0;
+}
+.container .order .row {
+  display: flex;
+  padding: 6rpx 20rpx;
+  align-items: center;
+}
+.container .order .row .time {
+  font-size: 24rpx;
+  color: #999;
+}
+.container .order .row .no {
+  font-size: 28rpx;
+  font-weight: 700;
+  flex:1;
+}
+.container .order .row .sku {
+  font-size: 24rpx;
+}
+.container .order .row .sku .num {
+  color: #FF9900;
+}
+.container .order .row .line {
+  flex:1;
+  font-size: 28rpx;
+}
+.container .cap {
+  height: 88rpx;
+  line-height: 88rpx;
+  padding-left: 20rpx;
+  position: relative;
+  font-size: 28rpx;
+}
+.container .cap::before {
+  position: absolute;
+  content: '';
+  left: 0rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rpx;
+  height: 40rpx;
+  background: #FF9900;
+}
+.container .item {
+  margin-bottom: 14rpx;
+  background: #fff;
+  padding: 10rpx 0;
+}
+.container .item .row {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  padding: 10rpx 20rpx;
+  border-bottom: 1rpx solid #ddd;
+  position: relative;
+}
+.container .item .row .yck {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  width: 100rpx;
+  height: 80rpx;
+}
+.container .item .info {
+  padding: 0 20rpx;
+}
+.container .item .info .name {
+  font-size: 28rpx;
+  padding: 20rpx 0;
+}
+.container .item .info .desc {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.container .item .info .desc .txt {
+  font-size: 28rpx;
+  color: #999999;
+  padding: 10rpx 0;
+  width: 30%;
+}
+.container .item .info .desc .txt .num {
+  color: #333333;
+}

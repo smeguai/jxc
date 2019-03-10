@@ -1,4 +1,5 @@
 import { outList, getRoute} from '../../api/api.js'
+import { get_YHM } from '../../utils/util.js'
 Page({
 
   /**
@@ -6,18 +7,31 @@ Page({
    */
   data: {
     filter: false,
+    filterList: [{ mode: '全部', idx: '' }, { mode: '未收货', idx: '0' }, { mode: '差异', idx: '2' }, { mode: '已收货', idx: '1' }],
     mode: ['未出库', '已出库', '差异'],
     userinfo: {},
+    outStatus: '',
     pageindex: 1,
     pagesize: 10,
     outList: [],
-    date: '请选择'
+    createDate: '',
+    //  时间区间
+    date_start: '2016-01-01',
+    date_end: ''
+  },
+  filterOutList() {
+    this.setData({
+      pageIndex: 1,
+      outList: []
+    })
+    this.getOutList()
+    this.handleFilterClick()
   },
   getOutList() {
     let data = {
       sysCode: this.data.userinfo.sysCode,
       deptId: this.data.userinfo.id,
-      outStatus: '',
+      outStatus: this.data.outStatus,
       routeId: '',
       created: '',
       pageIndex: this.data.pageindex,
@@ -40,12 +54,18 @@ Page({
 
     })
   },
+  Statustoogle(e) {
+    this.setData({
+      outStatus: e.currentTarget.dataset.idx
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
-      userinfo: wx.getStorageSync('userinfo')
+      userinfo: wx.getStorageSync('userinfo'),
+      date_end: get_YHM()
     })
     this.getOutList()
   },
@@ -80,7 +100,7 @@ Page({
   },
   datechange(e) {
     this.setData({
-      date: e.detail.value
+      createDate: e.detail.value
     })
   },
   /**

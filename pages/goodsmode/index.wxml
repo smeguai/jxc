@@ -54,7 +54,7 @@
             <view class='txt-3'>规格：{{item.itemSize}}</view>
             <view class='txt-3'>价格：{{item.itemCostPrice}}元/{{item.itemUnit}}</view>
             <view class='txt-3'>保质期：<text class='num'>100</text>天</view>
-            <view class='txt-3'>应出：<text class='num'>{{item.purNum}}</text>{{item.itemUnit}}</view>
+            <view class='txt-3'>应收：<text class='num'>{{item.purNum}}</text>{{item.itemUnit}}</view>
             <view class='txt-3'>实收：<text class='num'>{{item.takeNum}}</text>{{item.itemUnit}}</view>
             <view class='txt-3'>差异：<text class='num'>{{item.differenceNum}}</text></view>
           </view>
@@ -183,7 +183,7 @@
         </view>
         <view class='row'>
           <view class='txt0'>保质日期：</view>
-          <input class='ipt' bindblur='gandelexpirationBlur' placeholder='请输入保质日期'></input>
+          <input class='ipt' type='number' bindblur='gandelexpirationBlur' placeholder='请输入保质日期'></input>
           <view class='txt1'>天</view>
         </view>
         <block wx:if='{{stockMode==1}}'>
@@ -194,7 +194,7 @@
           </view>
           <view class='row'>
             <view class='txt0'>实收数量：</view>
-            <input class='ipt' bindblur='handleShipmentBlur' placeholder='请输入收货数量'></input>
+            <input class='ipt' type='number' bindblur='handleShipmentBlur' placeholder='请输入收货数量'></input>
             <view class='txt1'>{{itemDetail.itemUnit}}</view>
           </view>
         </block>
@@ -206,7 +206,7 @@
           </view>
           <view class='row'>
             <view class='txt0'>实出数量：</view>
-            <input class='ipt' bindblur='handleShipmentBlur' placeholder='请输入收货数量'></input>
+            <input class='ipt' type='number' bindblur='handleShipmentBlur' placeholder='请输入收货数量'></input>
             <view class='txt1'>{{itemDetail.itemUnit}}</view>
           </view>
         </block>
