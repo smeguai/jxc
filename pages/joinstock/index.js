@@ -109,6 +109,9 @@ Page({
         // wx.navigateTo({
         //   url: `../accomplish/index?stockMode=1&sysCode=${sysCode}&deptId=${deptId}&deptName=${deptName}&supplierId=${supplierId}&supplierName=${supplierName}&orderNo=${orderNo}&skuNum=${skuNum}&created=${created}`
         // })
+        wx.navigateTo({
+          url: `../accomplish/index?stockMode=1&sysCode=${1}&deptId=${1}&deptName=${'asd'}&supplierId=${1}&supplierName=${'aaaaa'}&orderNo=${'po112201'}&skuNum=${14}&created=${'2017-10-10'}`
+        })
       break;
       case 0:
       case 2:

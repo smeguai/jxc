@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/accomplish/index",
     "pages/index/index",
     "pages/joinstock/index",
     "pages/outofstock/index",
@@ -7,8 +8,7 @@
     "pages/addorder/index",
     "pages/outstock/index",
     "pages/stock/index",
-    "pages/signin/index",
-    "pages/accomplish/index"
+    "pages/signin/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#37d192",

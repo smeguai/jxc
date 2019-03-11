@@ -1,45 +1,39 @@
 <view class='container'>
-  <view class='menu-wrapper'>
-    <view class='mode'>全部</view>
-    <view class='menu' bindtap='handleFilterClick'>
-      <image class='icon' src='../../static/img/u135.png'></image>
-      <text class='txt'>筛选</text>
+  <view class='detail'>
+    <view class='row'>
+      <view class='no'>单号：DO1234567890</view>
+      <view class='created'>2019.01.09</view>
+    </view>
+    <view class='row'>
+      <view class='txt'>线路：线路100001</view>
+      <view class='sku'>sku数量：<text class='num'>4</text></view>
     </view>
   </view>
-  <view class='list'>
-    <view class='item' wx:for='{{outList}}' data-key='{{index}}' data-mode='{{item.outStatus}}' bindtap='handleItemClick'>
-      <view class='row'>
-        <text class='no'>单号：{{item.orderNo}}</text>
-        <text class='mode1' wx:if='{{item.outStatus==0}}'>{{mode[item.outStatus]}}</text>
-        <text class='mode2' wx:if='{{item.outStatus==2}}'>{{mode[item.outStatus]}}</text>
-        <image class='mode3' wx:if='{{item.outStatus==1}}' src='../../static/img/u1280.png'></image>
-      </view>
-      <view class='row'>
-        <text class='line'>线路：{{item.routeName}}</text>
-        <text class='date'>{{item.outDate}}</text>
-      </view>
-      <view class='sec'>
-        <view class='sku'>sku数量：<text class='num'>{{item.skuNum}}</text></view>
-        <view class='btn' wx:if='{{item.mode!==1}}'>出库</view>
-        <view class='details' wx:if='{{item.mode===1}}'>
-          <text class='txt'>查看详情</text>
-          <image class='icon' src='../../static/img/u129.png'></image>
+
+  <view class='section'><text class='title'>商品</text></view>
+
+  <view class='list-wrapper'>
+    <view class='item'>
+      <view class='qacode'>编号：1234567890123456</view>
+      <view class='info'>
+        <view class='name'>越南甜心芒果新鲜当季水果</view>
+        <view class='text-wrapper'>
+          <view class='text'>规格：10斤/箱</view>
+          <view class='text'>保质期：100天</view>
+          <view class='text'>单位：斤</view>
+          <block wx:if='{{true}}'>
+            <view class='text'>应出：<text class='t'>500斤</text></view>
+            <view class='text'>实出：<text class='t'>500斤</text></view>
+          </block>
+          <block wx:if='{{true}}'>
+            <view class='text'>应收：<text class='t'>500斤</text></view>
+            <view class='text'>实收：<text class='t'>500斤</text></view>
+          </block>
+          <view class='text'>差异：<text class='t'>0</text></view>
         </view>
       </view>
-    </view>
-  </view>
-  <view class='filter-wrapper' wx:if='{{filter}}'>
-    <view class='mask' bindtap='handleFilterClick'></view>
-    <view class='filter'>
-      <view class='tit'>状态</view>
-      <view class='status'>
-        <view class='{{outStatus==item.idx ? "item active": "item"}}' wx:for='{{filterList}}' data-idx='{{item.idx}}' bindtap='Statustoogle'>{{item.mode}}</view>
-      </view>
-      <view class='tit'>线路</view>
-      <picker mode='selector' range='{{[1,2,3,4]}}' class='pricker' range-key='supplierName'>{{supplierList[supplierId].supplierName || "请选择"}}</picker>
-      <view class='tit'>时间</view>
-      <picker mode='date' class='pricker' bindchange='datechange' end='{{date_end}}' start='{{date_start}}'>{{createDate||"请选择"}}</picker>
-      <view class='btn' bindtap='filterOutList'>确定</view>
+      <image class='icon' wx:if='{{true}}' src='../../static/img/u1280.png'></image>
+      <image class='icon' wx:if='{{false}}' src='../../static/img/u133.png'></image>
     </view>
   </view>
 </view>
