@@ -12,7 +12,8 @@ Page({
     userinfo: null,
     pageindex: 1,
     pagesize: 10,
-    condition: '',
+    itemSubno: '',
+    itemName: '',
     catelist: [],
     cate: '请选择',
     orderlist: [],
@@ -29,19 +30,19 @@ Page({
     })
   },
   handleSearchEnter(e) {
-    let t = e.detail.value.replace(/(^\s*)|(\s*$)/g, "")
-    if (t) {
-      this.setData({
-        orderlist: [],
-        pageIndex: 1
-      })
-      this.getcheckList(t)
-    }
+    this.setData({
+      orderlist: [],
+      pageIndex: 1,
+      itemSubno: '',
+      itemName: e.detail.value
+    })
+    this.getcheckList()
   },
-  getcheckList(condition = '') {
+  getcheckList() {
     let data = {
       deptId: this.data.userinfo.id,
-      condition,
+      itemSubno: this.data.itemSubno,
+      itemName: this.data.itemName,
       checkStatus: this.data.checker_mode,
       itemType: this.data.cate == "请选择" || this.data.cate == "全部" ? "" : this.data.cate,
       pageIndex: this.data.pageindex,
@@ -120,7 +121,9 @@ Page({
   handleCateClick() {
     this.setData({
       pageIndex: 1,
-      orderlist: []
+      orderlist: [],
+      itemSubno: '',
+      itemName: ''
     })
     this.getcheckList()
   },
@@ -179,7 +182,7 @@ Page({
   onReachBottom: function () {
     if (this.data.notRequires) return
     this.setData({
-      pageIndex: this.data.pageIndex + 1
+      pageindex: this.data.pageindex + 1
     })
     this.getcheckList()
   },
@@ -188,9 +191,11 @@ Page({
       success: (res) => {
         this.setData({
           orderlist: [],
-          pageIndex: 1
+          pageIndex: 1,
+          itemSubno: res.result,
+          itemName: ''
         })
-        this.getcheckList(res.result)
+        this.getcheckList()
       },
       fail: (err) => {
         wx.showToast({

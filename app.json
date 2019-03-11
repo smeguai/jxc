@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/joinstock/index",
     "pages/outofstock/index",
     "pages/goodsmode/index",
     "pages/addorder/index",
     "pages/outstock/index",
-    "pages/index/index",
     "pages/stock/index",
     "pages/signin/index",
     "pages/accomplish/index"

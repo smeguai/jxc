@@ -32,11 +32,11 @@
     <view class='addgoods'>
       <view class='headline'>添加商品</view>
       <view class='ipt-wrapper'>
-        <input class='ipt' placeholder='请输入商品条码' bindconfirm='search_iptenter' value='{{goodslist_active.itemSubno}}'></input>
+        <input class='ipt' placeholder='请输入商品条码' bindconfirm='search_no_iptenter' value='{{goodslist_active.itemSubno}}'></input>
         <image bindtap='handleScancodeClick' class='qrcode' src='../../static/img/u256.png'></image>
       </view>
       <view class='ipt-wrapper'>
-        <input class='ipt' placeholder='请输入商品名称' bindconfirm='search_iptenter' value='{{goodslist_active.itemName}}'></input>
+        <input class='ipt' placeholder='请输入商品名称' bindconfirm='search_name_iptenter' value='{{goodslist_active.itemName}}'></input>
         <image class='list' bindtap='handlegoodslistClick' src='../../static/img/u259.png'></image>
       </view>
       <view class='row'>
@@ -50,7 +50,7 @@
         </view>
         <view class='item'>
           <view class='txt'>采购数量：</view>
-          <input class='ipt' bindconfirm='purNum'></input>
+          <input class='ipt' bindblur='purNum' value='{{purNum}}'></input>
         </view>
         <view class='item'>
           <view class='txt'>商品价格：</view>

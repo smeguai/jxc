@@ -5,8 +5,8 @@ Page({
     gys: null
   },
   onLoad: function () {
+    this.init_userinfo()
     this.setData({
-      userinfo: wx.getStorageSync('userinfo'),
       gys: wx.getStorageSync('gys')
     })
   },
@@ -18,8 +18,15 @@ Page({
       simplename: this.data.gys[e.detail.value].simplename
     }
     wx.setStorageSync('userinfo', data)
+    this.init_userinfo()
+  },
+  init_userinfo() {
+    this.setData({  
+      userinfo: wx.getStorageSync('userinfo')
+    })
   },
   handleNavigateClick(e) {
+    console.log(this.data.userinfo.id)
     if (this.data.userinfo.id) {
       wx.navigateTo({
         url: e.currentTarget.dataset.url

@@ -36,9 +36,9 @@
         <view class='{{outStatus==item.idx ? "item active": "item"}}' wx:for='{{filterList}}' data-idx='{{item.idx}}' bindtap='Statustoogle'>{{item.mode}}</view>
       </view>
       <view class='tit'>线路</view>
-      <picker mode='selector' range='{{[1,2,3,4]}}' class='pricker' range-key='supplierName'>{{supplierList[supplierId].supplierName || "请选择"}}</picker>
+      <picker mode='selector' range='{{routeList}}' class='pricker' range-key='routeName'>{{routeList[routeId].routeName || "请选择"}}</picker>
       <view class='tit'>时间</view>
-      <picker mode='date' class='pricker' bindchange='datechange' end='{{date_end}}' start='{{date_start}}'>{{createDate||"请选择"}}</picker>
+      <picker mode='date' bindchange='handleRouterClick' class='pricker' bindchange='datechange' end='{{date_end}}' start='{{date_start}}'>{{createDate||"请选择"}}</picker>
       <view class='btn' bindtap='filterOutList'>确定</view>
     </view>
   </view>

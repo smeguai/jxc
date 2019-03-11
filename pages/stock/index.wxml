@@ -1,6 +1,6 @@
 <view class='container'>
   <view class='search-wrapper'>
-    <input class='search' placeholder='请输入或扫描商品的条码' bindconfirm='handleSearchEnter'></input>
+    <input class='search' placeholder='请输入商品名或扫描商品条码' bindconfirm='handleSearchEnter'></input>
     <image class='icon' bindtap='handleScancodeClick' src='../../static/img/u256.png'></image>
   </view>
   <view class='menu-wrapper'>

@@ -84,6 +84,8 @@
   padding: 0 20rpx;
   justify-content: center;
   box-sizing: border;
+  position: sticky;
+  top: 0;
 }
 .container .tab-wrapper .item {
   flex: 1;

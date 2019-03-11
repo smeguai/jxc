@@ -3,6 +3,10 @@
     <image class='avatar' src=''></image>
     <view class='name'>工作人员：{{userinfo.name}}</view>
   </view>
+  <!-- <navigator>
+    <image src='' class='avatar'></image>
+    <view>去登录</view>
+  </navigator> -->
   <picker class='picker-wrapper' bindchange='changeGYS' range='{{gys}}' mode='selector' range-key='simplename'>
     <view class='picker'>
       <image class='icon1' src='../../static/img/u77.png'></image>

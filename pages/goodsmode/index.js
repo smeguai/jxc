@@ -272,11 +272,13 @@ Page({
     let DI = this.data.saveDI_data
     DI.skuNum = this.data.itemList.length
     let itemls_string = []
+    let dotalAmt = 0
     this.data.itemList.map(i => {
-      itemls_string.push(JSON.stringify(i))
+      itemls_string.push(JSON.stringify(i)),
+      dotalAmt += i.totalAmt
     })
     DI.itemList = '[' + itemls_string.toString() + ']'
-    DI.totalAmt = this.data.totalAmt
+    DI.totalAmt = dotalAmt
     this.setData({
       saveDI_data: DI
     })
@@ -294,6 +296,7 @@ Page({
         operator: this.data.userinfo.name,
         itemList: '[' + itemls_string.toString() + ']'
       }
+      console.log(data)
       //  入库
       saveDI(data).then(res => {
         if (res.status === 200) {

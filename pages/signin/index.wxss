@@ -5,9 +5,14 @@
   display: flex;
   align-items: center;
   padding-top: 40rpx;
+  position: relative;
 }
-.container .section .txt {
-  font-size: 28rpx;
+.container .section .icon {
+  width: 36rpx;
+  height: 42rpx;
+  position: absolute;
+  left: 20rpx;
+  top: 60rpx;
 }
 .container .section .ipt {
   flex: 1;
@@ -17,7 +22,7 @@
   height: 88rpx;
   line-height: 88rpx;
   box-sizing: border-box;
-  padding: 0 20rpx;
+  padding: 0 20rpx 0 70rpx;
 }
 .container .signin{
   background: #37d192;

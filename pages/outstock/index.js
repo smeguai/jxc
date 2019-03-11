@@ -17,7 +17,14 @@ Page({
     createDate: '',
     //  时间区间
     date_start: '2016-01-01',
-    date_end: ''
+    date_end: '',
+    routeList: [],
+    routeId: ''
+  },
+  handleRouterClick(e) {
+    this.setData({
+      routeId: e.detail.value
+    })
   },
   filterOutList() {
     this.setData({
@@ -32,15 +39,19 @@ Page({
       sysCode: this.data.userinfo.sysCode,
       deptId: this.data.userinfo.id,
       outStatus: this.data.outStatus,
-      routeId: '',
-      created: '',
+      routeId: this.data.routeId,
+      created: this.data.createDate,
       pageIndex: this.data.pageindex,
       pageSize: this.data.pagesize
     }
     outList(data).then(res => {
       if (res.status === 200) {
+        let list = res.data.records
+        list.map(i => {
+          i.outDate = i.outDate.substr(0, 10)
+        })
         this.setData({
-          outList: res.data.records
+          outList: [...this.data.outList, ...list]
         })
         console.log(this.data.outList)
       }
@@ -50,8 +61,13 @@ Page({
     let data = {
       deptId: wx.getStorageSync('userinfo').id
     }
-    getRoute().then(res => {
-
+    getRoute(data).then(res => {
+      console.log(res)
+      if (res.status === 200) {
+        this.setData({
+          routeList: res.data
+        })
+      }
     })
   },
   Statustoogle(e) {
@@ -67,6 +83,7 @@ Page({
       userinfo: wx.getStorageSync('userinfo'),
       date_end: get_YHM()
     })
+    this.getRoute()
     this.getOutList()
   },
 

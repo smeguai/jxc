@@ -8,17 +8,18 @@ Page({
     maskerShow: false,
     goodslistmaskShow: false,
     getSupplierTXT: '请选择供应商名称',
-    getSupplierID: 0,
+    getSupplierID: -1,
     userinfo: null,
     SupplierList: [],
-
-    goodslist: [{a: 1}],
+    goodslist: [],
     pageindex: 1,
     pagesize: 20,
-    goodslist_active:null,
-    purNum: 0,
+    goodslist_active: null,
+    purNum: '',
     addList: [],
-    timer: null
+    timer: null,
+    itemSubno: '',
+    itemName: ''
   },
   scrollReachBottom() {
     clearTimeout(this.data.timer)
@@ -40,7 +41,7 @@ Page({
         this.setData({
           pageindex: 1,
           goodslist: [],
-          condition: res.result
+          itemSubno: res.result
         })
         this.getitemQuery()
         this.handlegoodsMaskerToggle()
@@ -55,7 +56,8 @@ Page({
   },
   handlegoodsMaskerToggle() {
     this.setData({
-      goodslistmaskShow: !this.data.goodslistmaskShow
+      goodslistmaskShow: !this.data.goodslistmaskShow,
+      pageindex: 1
     })
   },
   getSupplier() {
@@ -84,12 +86,30 @@ Page({
     })
   },
   handlegoodslistClick() {
+    this.setData({
+      pageindex: 1,
+      goodslist: [],
+      itemName: e.detail.value
+    })
     this.getitemQuery()
     this.handlegoodsMaskerToggle()
   },
-  search_iptenter(e) {
+  search_name_iptenter(e) {
     this.setData({
-      condition: e.detail.value
+      pageindex: 1,
+      goodslist: [],
+      itemName: e.detail.value
+    })
+    if (this.data.goodslist) {
+      this.getitemQuery()
+      this.handlegoodsMaskerToggle()
+    }
+  },
+  search_no_iptenter(e) {
+    this.setData({
+      itemSubno: e.detail.value,
+      pageindex: 1,
+      goodslist: []
     })
     if (this.data.goodslist) {
       this.getitemQuery()
@@ -101,16 +121,17 @@ Page({
       title: '加载中...'
     })
     let data = {
-      condition: this.data.condition,
 	    deptId: this.data.userinfo.id,
 	    pageIndex: this.data.pageindex,
-	    pageSize: this.data.pagesize
+	    pageSize: this.data.pagesize,
+      itemSubno: this.data.itemSubno,
+      itemName: this.data.itemName
     }
     itemQuery(data).then(res => {
       if (res.status === 200) {
         if (res.data) {
           this.setData({
-            goodslist: res.data.data,
+            goodslist: [...this.data.goodslist, ...res.data.data],
             pageindex: this.data.pageindex + 1
           })
         }
@@ -118,37 +139,54 @@ Page({
     })
   },
   handleAddItemClick() {
-    let item = this.data.goodslist_active
-    if (!item) {
+    if (this.data.getSupplierID == -1) {
       wx.showToast({
-        title: '还未录入商品信息',
+        title: '请选择供应商',
         icon: 'none'
       })
-    } else {
-      let userinfo = this.data.userinfo
-      let data = {
-        sysCode: userinfo.sysCode,
-        deptId: userinfo.id,
-        deptName: userinfo.simplename,
-        supplierId: this.data.getSupplierID,
-        supplierName: this.data.getSupplierTXT,
-        itemId: item.id,
-        itemSubno: item.itemSubno,
-        itemNo: item.itemNo,
-        itemName: item.itemName,
-        itemUnit: item.itemUnit,
-        itemSize: item.itemSize,
-        itemCostPrice: item.itemCostPrice,
-        totalAmt: item.itemCostPrice * this.data.purNum,
-        purNum: this.data.purNum
+      return
+    }
+    console.log(1)
+    let t = this.data.purNum.replace(/(^\s*)|(\s*$)/g, "")
+    if (t) {
+      let item = this.data.goodslist_active
+      if (!item) {
+        wx.showToast({
+          title: '还未录入商品信息',
+          icon: 'none'
+        })
+      } else {
+        let userinfo = this.data.userinfo
+        let data = {
+          sysCode: userinfo.sysCode,
+          deptId: userinfo.id,
+          deptName: userinfo.simplename,
+          supplierId: this.data.getSupplierID,
+          supplierName: this.data.getSupplierTXT,
+          itemId: item.id,
+          itemSubno: item.itemSubno,
+          itemNo: item.itemNo,
+          itemName: item.itemName,
+          itemUnit: item.itemUnit,
+          itemSize: item.itemSize,
+          itemCostPrice: item.itemCostPrice,
+          totalAmt: item.itemCostPrice * this.data.purNum,
+          purNum: this.data.purNum
+        }
+        let addList = [...this.data.addList, data]
+        this.setData({
+          addList,
+          goodslist_active: null,
+          purNum: ''
+        })
+        wx.showToast({
+          title: '添加成功！',
+          icon: 'none'
+        })
       }
-      let addList = [...this.data.addList, data]
-      this.setData({
-        addList,
-        goodslist_active: null
-      })
-      wx.showToast({
-        title: '添加成功！',
+    } else {
+      wx.showToast({  
+        title: '请输入采购数量',
         icon: 'none'
       })
     }
@@ -157,10 +195,11 @@ Page({
     this.setData({
         goodslist_active: e.currentTarget.dataset.item
     })
+    this.handlegoodsMaskerToggle()
   },
   purNum(e) {
     this.setData({
-      purNum: e.detail.value
+      purNum: e.detail.value.replace(/(^\s*)|(\s*$)/g, "")
     })
   },
   /**
@@ -204,7 +243,14 @@ Page({
       if (res.status === 200) {
         wx.showToast({
           title: '添加成功',
-          icon: 'none'
+          icon: 'none',
+          success: () => {
+            setTimeout(() => {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1500)
+          }
         })
       }
     })

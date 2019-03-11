@@ -53,12 +53,6 @@ Page({
     this.handleConfirmClick()
     this.handleFilterClick()
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
   handleFilterClick() {
     this.setData({
       filter: !this.data.filter
@@ -90,8 +84,12 @@ Page({
     }
     purList(data).then(res => {
       if (res.status === 200) {
+        let list = res.data.records
+        list.map(i => {
+          i.created = i.created.substr(0, 10)
+        })
         this.setData({
-          purList: [...this.data.purList, ...res.data.records]
+          purList: [...this.data.purList, ...list]
         })
       }
     })
@@ -108,9 +106,9 @@ Page({
     let { deptId, deptName, supplierId, supplierName, orderNo, skuNum, created} = item
     switch (mode) {
       case 1:
-        wx.navigateTo({
-          url: `../accomplish/index?stockMode=1&sysCode=${sysCode}&deptId=${deptId}&deptName=${deptName}&supplierId=${supplierId}&supplierName=${supplierName}&orderNo=${orderNo}&skuNum=${skuNum}&created=${created}`
-        })
+        // wx.navigateTo({
+        //   url: `../accomplish/index?stockMode=1&sysCode=${sysCode}&deptId=${deptId}&deptName=${deptName}&supplierId=${supplierId}&supplierName=${supplierName}&orderNo=${orderNo}&skuNum=${skuNum}&created=${created}`
+        // })
       break;
       case 0:
       case 2:
