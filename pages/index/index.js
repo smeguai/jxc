@@ -26,7 +26,6 @@ Page({
     })
   },
   handleNavigateClick(e) {
-    console.log(this.data.userinfo.id)
     if (this.data.userinfo.id) {
       wx.navigateTo({
         url: e.currentTarget.dataset.url

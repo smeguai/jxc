@@ -249,6 +249,7 @@
   display: flex;
   padding: 20rpx;
   align-items: center;
+  border-bottom: 1rpx solid #ddd;
 }
 .container .goodslistmask .main .item .txt {
   text-align: center;

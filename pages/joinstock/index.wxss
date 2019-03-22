@@ -67,10 +67,17 @@
   padding-top: 6rpx;
   position: relative;
 }
-.container .list .item .row .mode {
+.container .list .item .row .mode1 {
   padding: 6rpx 8rpx;
   border: 1rpx solid #FF9900;
   color: #FF9900;
+  font-size: 24rpx;
+  border-radius: 8rpx;
+}
+.container .list .item .row .mode2 {
+  padding: 6rpx 8rpx;
+  border: 1rpx solid #37d192;
+  color: #37d192;
   font-size: 24rpx;
   border-radius: 8rpx;
 }

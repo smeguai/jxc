@@ -11,7 +11,7 @@ Page({
     mode: ['未出库', '已出库', '差异'],
     userinfo: {},
     outStatus: '',
-    pageindex: 1,
+    pageIndex: 1,
     pagesize: 10,
     outList: [],
     createDate: '',
@@ -41,7 +41,7 @@ Page({
       outStatus: this.data.outStatus,
       routeId: this.data.routeId,
       created: this.data.createDate,
-      pageIndex: this.data.pageindex,
+      pageIndex: this.data.pageIndex,
       pageSize: this.data.pagesize
     }
     outList(data).then(res => {
@@ -53,16 +53,15 @@ Page({
         this.setData({
           outList: [...this.data.outList, ...list]
         })
-        console.log(this.data.outList)
       }
     })
+    wx.stopPullDownRefresh()
   },
   getRoute() {
     let data = {
       deptId: wx.getStorageSync('userinfo').id
     }
     getRoute(data).then(res => {
-      console.log(res)
       if (res.status === 200) {
         this.setData({
           routeList: res.data
@@ -105,7 +104,9 @@ Page({
     let { created, deptId, deptName, skuNum, outStatus, orderNo, routeId, routeName } = item
     switch(mode) {
       case 1:
-
+        wx.navigateTo({
+          url: `../accomplish/index?stockMode=2&sysCode=${sysCode}&created=${created}&deptId=${deptId}&deptName=${deptName}&skuNum=${skuNum}&outStatus=${outStatus}&orderNo=${orderNo}&routeId=${routeId}&routeName=${routeName}`
+        })
       break;
       case 0:
       case 2:
@@ -124,6 +125,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.setData({
+      pageIndex: this.data.pageIndex + 1
+    })
+    this.getOutList()
+  },
+  onPullDownRefresh() {
+    this.setData({
+      pageIndex: 1,
+      outList: []
+    })
+    this.getOutList()
   }
 })

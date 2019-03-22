@@ -8,7 +8,7 @@
   </view>
   <view class='list'>
     <view class='item' wx:for='{{outList}}' data-key='{{index}}' data-mode='{{item.outStatus}}' bindtap='handleItemClick'>
-      <view class='row'>
+        <view class='row'>
         <text class='no'>单号：{{item.orderNo}}</text>
         <text class='mode1' wx:if='{{item.outStatus==0}}'>{{mode[item.outStatus]}}</text>
         <text class='mode2' wx:if='{{item.outStatus==2}}'>{{mode[item.outStatus]}}</text>
@@ -41,5 +41,9 @@
       <picker mode='date' bindchange='handleRouterClick' class='pricker' bindchange='datechange' end='{{date_end}}' start='{{date_start}}'>{{createDate||"请选择"}}</picker>
       <view class='btn' bindtap='filterOutList'>确定</view>
     </view>
+  </view>
+  <view class='notdata' wx:if='{{outList.length==0}}'>
+    <icon type='info' size='88rpx' color='#37d192'></icon>
+    <text class='txt'>暂时木有内容呀~</text>
   </view>
 </view>

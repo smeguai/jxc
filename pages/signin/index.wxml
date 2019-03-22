@@ -1,12 +1,12 @@
 <view class='container'>
   <view class='section'>
     <image src='../../static/img/u32.png' class='icon'></image>
-    <input class='ipt' id='name' bindblur='setname' placeholder='请输入账号'></input>
+    <input class='ipt' id='name' bindinput='setname' placeholder='请输入账号'></input>
   </view>
   
   <view class='section'>
     <image src='../../static/img/u33.png' class='icon'></image>
-    <input class='ipt' id='word' password bindblur='setpass' placeholder='请输入密码'></input>
+    <input class='ipt' id='word' password bindinput='setpass' placeholder='请输入密码'></input>
   </view>
 
   <view class='signin' bindtap='signin'>登录</view>

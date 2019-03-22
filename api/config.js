@@ -1,4 +1,6 @@
 const u = 'http://192.168.1.183:8105'
+// const u = 'https://keke.store.zksr.cn'
+
 
 export default function https (api, data) {
   let url = u + api
@@ -12,10 +14,15 @@ export default function https (api, data) {
       },
       dataType: 'json',
       success: res => {
+        wx.hideLoading()
         resolve(res)
       },
       fail: err => {
-        rej(err)
+        wx.hideLoading()
+        wx.showToast({
+          title: '网络状态不太好,下拉刷新试试...(TAT)',
+          icon: 'none'
+        })
       }
     })
   })

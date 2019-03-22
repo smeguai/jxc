@@ -2,13 +2,13 @@
 
   <view class='search-wrapper'>
     <input class='search' bindconfirm='handleSearchEnter' placeholder='请输入或扫描商品的条码'></input>
-    <image class='icon' src='../../static/img/u256.png'></image>
+    <image class='icon' bindtap='handleScancodeClick' src='../../static/img/u256.png'></image>
   </view>
 
   <view class='order' wx:if='{{stockMode==1}}'>
     <view class='row'>
-      <view class='no' wx:if='{{stockMode==2}}'><text class='mode1'>手工录入</text>单号：{{orderNo}}</view>
-      <view class='no' wx:if='{{stockMode==1}}'><text class='mode2'>自动生成</text>单号：{{orderNo}}</view>
+      <view class='no' wx:if='{{purType==0}}'><text class='mode1'>手工录入</text>单号：{{orderNo}}</view>
+      <view class='no' wx:if='{{purType==1}}'><text class='mode2'>自动生成</text>单号：{{orderNo}}</view>
       <view class='time'>{{created}}</view>
     </view>
     <view class='row'>
@@ -66,7 +66,7 @@
         <view class='row'>
           <view class='no' wx:if='{{item.afterNum!=2}}'>编号：{{item.orderNo}}</view>
           <view class='no' wx:else><text class='diff'>[退货差异]</text>编号：{{item.orderNo}}</view>
-          <view class='outstock color_0' wx:if='{{item.outStatus==1}}'>已出库<image class='icon' src='../../static/img/u129.png'></image></view>
+          <image wx:if='{{item.purStatus==1}}' wx:if='{{item.outStatus==1}}' class='sh' src='../../static/img/u1280.png'></image>
           <view class='outstock color_0' wx:if='{{item.outStatus==0}}'>出库<image class='icon' src='../../static/img/u129.png'></image></view>
           <view class='outstock color_1' wx:if='{{item.outStatus==2}}'>差异<image class='icon' src='../../static/img/u129.png'></image></view>
         </view>
@@ -76,7 +76,7 @@
             <view class='txt-2'>单位：{{item.itemUnit}}</view>
             <view class='txt-2'>规格：{{item.itemSize}}</view>
             <view class='txt-2'>价格：{{item.itemCostPrice}}元/{{item.itemUnit}}</view>
-            <view class='txt-2'>应出：<text class='num'>{{item.shouldNum}}</text>{{item.itemUnit}}</view>
+            <view class='txt-2'>应出：<text class='num'>{{t_itemNum}}</text>{{item.itemUnit}}</view>
           </view>
           <view class='desc' wx:else>
             <view class='txt-3'>单位：{{item.itemUnit}}</view>
@@ -84,15 +84,16 @@
             <view class='txt-3'>价格：{{item.itemCostPrice}}元/{{item.itemUnit}}</view>
             <view class='txt-3'>差异：<text class='count'>{{item.differenceNum}}</text>{{item.itemUnit}}</view>
             <view class='txt-3'>退货：<text class='count'>{{item.afterNum}}</text>{{item.itemUnit}}</view>
-            <view class='txt-3'>应出：<text class='num'>{{item.shouldNum}}</text>{{item.itemUnit}}</view>
+            <view class='txt-3'>应出：<text class='num'>{{t_itemNum}}</text>{{item.itemUnit}}</view>
           </view>
         </view>
       </view>
     </view>
   </view>
+
   <view class='savelist' hidden='{{tabIdx==0}}'>
     <view class='list' wx:if='{{stockMode==1}}'>
-      <view class='item' bindtap='handleItemClick' data-item='{{item}}' wx:key='{{index}}' data-key='{{index}}' wx:for='{{itemList}}'>
+      <view class='item' bindtouchstart='handleSaveTouchStart' bindtouchmove='handleSaveItemMove' bindtap='handleSaveItemListClick' data-item='{{item}}' wx:key='{{index}}' data-key='{{index}}' wx:for='{{itemList}}' animation='{{index === animationDataIdx? animationData:""}}'>
         <view class='row'>
           <view class='no'>条码：{{item.itemSubno}}</view>
           <view wx:if='{{item.purStatus==0}}' class='outstock color_0'>收货<image class='icon' src='../../static/img/u129.png'></image></view>
@@ -104,23 +105,24 @@
           <view class='desc' wx:if='{{item.purStatus!=2}}'>
             <view class='txt-2'>单位：{{item.itemUnit}}</view>
             <view class='txt-2'>规格：{{item.itemSize}}</view>
-            <view class='txt-2'>价格：{{item.itemCostPrice}}元/{{item.itemUnit}}</view>
+            <view class='txt-2'>价格：{{item.itemCostPrice||0}}元/{{item.itemUnit}}</view>
             <view class='txt-2'>应收：<text class='num'>{{item.purNum}}</text></view>
           </view>
           <view class='desc' wx:if='{{item.purStatus==2}}'>
             <view class='txt-3'>单位：{{item.itemUnit}}</view>
             <view class='txt-3'>规格：{{item.itemSize}}</view>
-            <view class='txt-3'>价格：{{item.itemCostPrice}}元/{{item.itemUnit}}</view>
-            <view class='txt-3'>保质期：<text class='num'>{{item.expirationDate}}</text>天</view>
-            <view class='txt-3'>应出：<text class='num'>{{item.purNum}}</text>{{item.itemUnit}}</view>
-            <view class='txt-3'>实收：<text class='num'>{{item.takeNum}}</text>{{item.itemUnit}}</view>
-            <view class='txt-3'>差异：<text class='num'>{{item.differenceNum}}</text></view>
+            <view class='txt-3'>价格：{{item.itemCostPrice||0}}元/{{item.itemUnit}}</view>
+            <view class='txt-3'>保质期：<text class='num'>{{item.expirationDate||0}}</text>天</view>
+            <view class='txt-3'>应收：<text class='num'>{{item.purNum||0}}</text>{{item.itemUnit}}</view>
+            <view class='txt-3'>实收：<text class='num'>{{item.takeNum||0}}</text>{{item.itemUnit}}</view>
+            <view class='txt-3'>差异：<text class='num'>{{item.differenceNum||0}}</text></view>
           </view>
         </view>
+        <view class='delete' catchtap='savelist_item_delete' data-idx='{{index}}'>删除</view>
       </view>
     </view>
     <view class='list' wx:if='{{stockMode==2}}'>
-      <view class='item' bindtap='handleItemClick' data-item='{{item}}' wx:for='{{itemList}}' wx:key='{{index}}' data-key='{{index}}'>
+      <view class='item' bindtouchstart='handleSaveTouchStart' bindtouchmove='handleSaveItemMove' bindtap='handleSaveItemListClick' data-item='{{item}}' wx:for='{{itemList}}' wx:key='{{index}}' data-key='{{index}}' animation='{{index === animationDataIdx? animationData:""}}'>
         <view class='row'>
           <view class='no' wx:if='{{item.afterNum!=2}}'>编号：{{item.orderNo}}</view>
           <view class='no' wx:else><text class='diff'>[退货差异]</text>编号：{{item.orderNo}}</view>
@@ -130,29 +132,35 @@
         </view>
         <view class='info'>
           <view class='name'>{{item.itemName}}</view>
-          <view class='desc' wx:if='{{item.afterNum!=null}}'>
+          <view class='desc' wx:if='{{!item.differenceNum}}'>
             <view class='txt-2'>单位：{{item.itemUnit}}</view>
             <view class='txt-2'>规格：{{item.itemSize}}</view>
             <view class='txt-2'>价格：{{item.itemCostPrice}}元/{{item.itemUnit}}</view>
-            <view class='txt-2'>应出：<text class='num'>{{shouldNum}}</text>{{item.itemUnit}}</view>
+            <view class='txt-2'>应出：<text class='num'>{{t_itemNum}}</text>{{item.itemUnit}}</view>
           </view>
           <view class='desc' wx:else>
             <view class='txt-3'>单位：{{item.itemUnit}}</view>
             <view class='txt-3'>规格：{{item.itemSize}}</view>
             <view class='txt-3'>价格：{{item.itemCostPrice}}元/{{item.itemUnit}}</view>
-            <view class='txt-3'>差异：<text class='count'>{{item.differenceNum}}</text>{{item.itemUnit}}</view>
-            <view class='txt-3'>退货：<text class='count'>{{item.afterNum}}</text>{{item.itemUnit}}</view>
-            <view class='txt-3'>应出：<text class='num'>{{item.shouldNum}}</text>{{item.itemUnit}}</view>
+            <view class='txt-3'>差异：<text class='count'>{{item.differenceNum||0}}</text>{{item.itemUnit}}</view>
+            <view class='txt-3'>退货：<text class='count'>{{item.afterNum||0}}</text>{{item.itemUnit}}</view>
+            <view class='txt-3'>应出：<text class='num'>{{t_itemNum}}</text>{{item.itemUnit}}</view>
           </view>
         </view>
+        <view class='delete' catchtap='savelist_item_delete' data-idx='{{index}}'>删除</view>
       </view>
     </view>
   </view>
-  <view class='btns' wx:if='{{tabIdx!=0 && itemList.length!=0}}'>
+  <!-- 底部批量出库,入库 -->
+  <view class='btns' wx:if='{{tabIdx!=0 && itemList.length!=0 && stockMode==1}}'>
+    <view class='cancel' bindtap='handleNavigateBackClick'>取消</view>
+    <view class='confirm' bindtap='handleOutStockClick'>完成入库</view>
+  </view>
+    <view class='btns' wx:if='{{tabIdx!=0 && itemList.length!=0 && stockMode==2}}'>
     <view class='cancel' bindtap='handleNavigateBackClick'>取消</view>
     <view class='confirm' bindtap='handleOutStockClick'>完成出库</view>
   </view>
-  
+
   <view class='popsection' wx:if='{{popsectionShow}}'>
     <view class='mask'></view>
     <view class='modify'>
@@ -165,7 +173,7 @@
         <view class='txt'>规格：{{itemDetail.itemSize}}</view>
         <view class='txt'>价格：{{itemDetail.itemCostPrice}}元/{{itemDetail.itemUnit}}</view>
         <view class='txt' wx:if='{{stockMode==1}}'>应收：<text class='count'>{{itemDetail.purNum}}</text>{{itemDetail.itemUnit}}</view>
-        <view class='txt' wx:if='{{stockMode==2}}'>应出：<text class='count'>{{itemDetail.purNum}}</text>{{itemDetail.itemUnit}}</view>
+        <view class='txt' wx:if='{{stockMode==2}}'>应出：<text class='count'>{{itemDetail.shouldNum}}</text>{{itemDetail.itemUnit}}</view>
       </view>
       <view class='norm' wx:if='{{itemDetail.afterNum>0}}'>
         <view class='difftxt'>单位：{{itemDetail.itemUnit}}</view>
@@ -173,17 +181,18 @@
         <view class='difftxt'>价格：{{itemDetail.itemCostPrice}}元/{{itemDetail.itemUnit}}</view>
         <view class='difftxt'>差异：<text class='num'>{{itemDetail.differenceNum}}</text>{{itemDetail.itemUnit}}</view>
         <view class='difftxt'>退货：<text class='num'>{{itemDetail.afterNum}}</text>{{itemDetail.itemUnit}}</view>
-        <view class='difftxt'>应出：<text class='count'>{{itemDetail.purNum}}</text>{{itemDetail.itemUnit}}</view>
+        <view class='difftxt'>应出：<text class='count'>{{itemDetail.shouldNum}}</text>{{itemDetail.itemUnit}}</view>
       </view>
       <view class='from'>
         <view class='row'>
           <view class='txt0'>生产日期：</view>
-          <picker mode='date' class='ipt' bindchange='handleDateChange'>{{t_data}}</picker>
+          <picker mode='date' class='ipt' bindchange='handleDateChange' end='{{date_end}}' start='{{date_start}}'>{{t_data}}</picker>
+
           <view class='txt1'></view>
         </view>
         <view class='row'>
           <view class='txt0'>保质日期：</view>
-          <input class='ipt' type='number' bindblur='gandelexpirationBlur' placeholder='请输入保质日期'></input>
+          <input class='ipt' type='number' bindblur='gandelexpirationBlur' value='{{t_expiration_date}}' placeholder='请输入保质日期'></input>
           <view class='txt1'>天</view>
         </view>
         <block wx:if='{{stockMode==1}}'>
@@ -193,8 +202,13 @@
             <view class='txt1'>{{itemDetail.itemUnit}}</view>
           </view>
           <view class='row'>
-            <view class='txt0'>实收数量：</view>
-            <input class='ipt' type='number' bindblur='handleShipmentBlur' placeholder='请输入收货数量'></input>
+            <view class='txt0'>已收数量：</view>
+            <view class='count'>{{itemDetail.takeNum}}</view>
+            <view class='txt1'>{{itemDetail.itemUnit}}</view>
+          </view>
+          <view class='row'>
+            <view class='txt0'>收货数量：</view>
+            <input class='ipt' type='number' value='{{t_itemNum}}' bindblur='handleShipmentBlur' placeholder='请输入收货数量'></input>
             <view class='txt1'>{{itemDetail.itemUnit}}</view>
           </view>
         </block>
@@ -205,16 +219,16 @@
             <view class='txt1'>{{itemDetail.itemUnit}}</view>
           </view>
           <view class='row'>
-            <view class='txt0'>实出数量：</view>
-            <input class='ipt' type='number' bindblur='handleShipmentBlur' placeholder='请输入收货数量'></input>
+            <view class='txt0'>已收数量：</view>
+            <view class='count'>{{itemDetail.outNum}}</view>
+            <view class='txt1'>{{itemDetail.itemUnit}}</view>
+          </view>
+          <view class='row'>
+            <view class='txt0'>收货数量：</view>
+            <input class='ipt' type='number' value='{{t_itemNum}}' bindblur='handleShipmentBlur' placeholder='请输入收货数量'></input>
             <view class='txt1'>{{itemDetail.itemUnit}}</view>
           </view>
         </block>
-        <view class='row'>
-          <view class='txt0'>差异数量：</view>
-          <view class='count'>{{itemDetail.differenceNum?itemDetail.differenceNum:""}}</view>
-          <view class='txt1'>{{itemDetail.itemUnit}}</view>
-        </view>
         <view class='row'>
           <view class='txt0'>备注：</view>
           <textarea class='remarks' bindblur='handleRemarksBlur'></textarea>
@@ -222,9 +236,13 @@
         </view>
       </view>
       <view class='btns'>
-        <view class='cancel' bindtap='popMaskerToggle'>取消</view>
+        <view class='cancel' bindtap='cancelSave'>取消</view>
         <view class='confirm' bindtap='saveGoods'>提交</view>
       </view>
     </view>
+  </view>
+  <view class='notdata' wx:if='{{outList.length==0}}'>
+    <icon type='info' size='88rpx' color='#37d192'></icon>
+    <text class='txt'>暂时木有内容呀~</text>
   </view>
 </view>

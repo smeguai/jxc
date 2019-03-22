@@ -14,14 +14,14 @@
     </view>
   </view>
   <view class='list-wrapper'>
-    <view class='item' wx:for='{{addList}}'>
+    <view class='item' wx:for='{{addList}}' bindtap='handleItemClick' data-idx='{{index}}'>
       <view class='no'>商品条码：{{item.itemSubno}}</view>
       <view class='name'>{{item.itemName}}</view>
       <view class='desc'>
         <view class='txt'>单位：{{item.itemUnit}}</view>
-        <view class='txt'>规格：{{item.itemSizeDes}}</view>
+        <view class='txt'>规格：{{item.itemSize}}</view>    
         <view class='txt'>价格：{{item.itemCostPrice}}</view>
-        <view class='txt'>数量：<text class='num'>500</text>斤</view>
+        <view class='txt'>数量：<text class='num'>{{item.purNum}}</text>{{item.itemUnit}}</view>
       </view>
     </view>
   </view>
@@ -50,7 +50,7 @@
         </view>
         <view class='item'>
           <view class='txt'>采购数量：</view>
-          <input class='ipt' bindblur='purNum' value='{{purNum}}'></input>
+          <input class='ipt' bindblur='purNum' value='{{purNum || goodslist_active.purNum}}'></input>
         </view>
         <view class='item'>
           <view class='txt'>商品价格：</view>
@@ -79,7 +79,7 @@
         <view class='item' wx:for='{{goodslist}}' data-item='{{item}}' bindtap='goodsItemClick'>
           <view class='name txt'>{{item.itemName}}</view>
           <view class='txt'>{{item.itemUnit}}</view>
-          <view class='txt'>{{item.itemSizeDes}}</view>
+          <view class='txt'>{{item.itemSize}}</view>
           <view class='txt'>{{item.itemNowPrice}}元/{{item.itemUnit}}</view>
           <view class='txt'>{{item.itemSubno}}</view>
         </view>

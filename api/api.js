@@ -14,10 +14,8 @@ export function purList(data) {
 //  采购订单详情
 export function purDetail(data) {
   return https('/Invoicing/purDetail', data).then(res => {
-    wx.hideLoading()
     return res.data
   }).catch(() => {
-    wx.hideLoading()
   })
 }
 //  获取供应商
@@ -47,19 +45,15 @@ export function outList(data) {
 //  商品查询
 export function itemQuery(data) {
   return https('/Invoicing/itemQuery', data).then(res => {
-    wx.hideLoading()
     return res.data
   }).catch(() => {
-    wx.hideLoading()
   })
 }
 // 出库订单详情
 export function outDetail(data) {
   return https('/Invoicing/outDetail', data).then(res => {
-    wx.hideLoading()
     return res.data
   }).catch(() => {
-    wx.hideLoading()
   })
 }
 // 获取盘点数据

@@ -36,3 +36,13 @@
   font-size: 28rpx;
   padding-left: 6rpx;
 }
+.notdata {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.notdata .txt {
+  padding-top: 20rpx;
+  font-size: 28rpx;
+}

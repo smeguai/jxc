@@ -15,7 +15,7 @@
   <view class='list'>
     <view class='item' wx:for='{{purList}}' bindtap='handleItemClick' data-key='{{index}}' data-mode='{{item.purStatus}}'>
       <view class='row'>
-        <text class='mode'>{{_Type[item.purType]}}</text>
+        <text class='{{item.purType == 1?"mode1":"mode2"}}'>{{_Type[item.purType]}}</text>
         <text class='no'>单号：{{item.orderNo}}</text>
         <!-- <text class='status'>{{_Status[item.purStatus]}}</text> -->
         <text class='status color_0' wx:if='{{item.purStatus == 0}}'>未收货</text>
@@ -45,10 +45,14 @@
         <view class='{{purStatus==item.idx ? "item active": "item"}}' wx:for='{{filterList}}' wx:key='{{index}}' data-idx='{{item.idx}}' bindtap='Statustoogle'>{{item.mode}}</view>
       </view>
       <view class='tit'>供应商</view>
-      <picker bindchange='bindsupplierChange' mode='selector' valule='{{index}}' range='{{supplierList}}' class='pricker' range-key='supplierName'>{{supplierList[supplierId].supplierName || "请选择"}}</picker>
+      <picker bindchange='bindsupplierChange' mode='selector' valule='{{index}}' range='{{supplierList}}' class='pricker' range-key='supplierName'>{{supplierList[supplierIdx].supplierName || "请选择"}}</picker>
       <view class='tit'>时间</view>
       <picker bindchange='bindDateChange' mode='date' class='pricker' end='{{date_end}}' start='{{date_start}}'>{{createDate || "请选择"}}</picker>
       <view class='btn' bindtap='filterPurList'>确定</view>
     </view>
   </view>
-</view> 
+  <view class='notdata' wx:if='{{purList.length==0}}'>
+    <icon type='info' size='88rpx' color='#37d192'></icon>
+    <text class='txt'>暂时木有内容呀~</text>
+  </view>
+</view>  

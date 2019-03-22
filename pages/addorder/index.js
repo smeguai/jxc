@@ -30,10 +30,25 @@ Page({
       timer: t
     })
   },
-  handleMaskerToggle() {
+  handleItemClick(e) {
+    let index = e.currentTarget.dataset.idx
     this.setData({
-      maskerShow: !this.data.maskerShow
+      maskerShow: !this.data.maskerShow,
+      goodslist_active: this.data.addList[index]
     })
+  },
+  handleMaskerToggle() {
+    if (this.data.getSupplierTXT && this.data.getSupplierID) {
+      this.setData({
+        maskerShow: !this.data.maskerShow,
+        goodslist_active: null
+      })
+    } else {
+      wx.showToast({
+        title: '请选择供应商!',
+        icon: 'none'
+      })
+    }
   },
   handleScancodeClick() {
     wx.scanCode({
@@ -63,7 +78,6 @@ Page({
   getSupplier() {
     let data = { sysCode: this.data.userinfo.sysCode }
     getSupplier(data).then(res => {
-      console.log(res.data)
       if (res.status===200) {
         this.setData({
           SupplierList: res.data
@@ -89,7 +103,8 @@ Page({
     this.setData({
       pageindex: 1,
       goodslist: [],
-      itemName: e.detail.value
+      itemName: '',
+      itemSubno: ''
     })
     this.getitemQuery()
     this.handlegoodsMaskerToggle()
@@ -146,7 +161,6 @@ Page({
       })
       return
     }
-    console.log(1)
     let t = this.data.purNum.replace(/(^\s*)|(\s*$)/g, "")
     if (t) {
       let item = this.data.goodslist_active
@@ -192,8 +206,10 @@ Page({
     }
   },
   goodsItemClick(e) {
+    let item = e.currentTarget.dataset.item
+    if (this.data.goodslist_active && this.data.goodslist_active.id === item.id) return
     this.setData({
-        goodslist_active: e.currentTarget.dataset.item
+        goodslist_active: item
     })
     this.handlegoodsMaskerToggle()
   },

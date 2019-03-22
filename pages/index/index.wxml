@@ -1,7 +1,13 @@
 <view class="container">
   <view class='userinfo'>
-    <image class='avatar' src=''></image>
-    <view class='name'>工作人员：{{userinfo.name}}</view>
+    <block wx:if='{{userinfo}}'>
+      <image class='avatar' src='../../static/img/not_sign.png'></image>
+      <view class='name'>工作人员：{{userinfo.name}}</view>
+    </block>
+    <navigator wx:else url='' hover-class='none' class='navigate' url='../signin/index'>
+      <image src='../../static/img/not_sign.png' class='avatar'></image>
+      <view class='name'>去登录</view>
+    </navigator>
   </view>
   <!-- <navigator>
     <image src='' class='avatar'></image>
@@ -20,7 +26,7 @@
         <image class='icon' src='../../static/img/u34.png'></image>
         <view class='txt'>采购入库</view>
       </view>
-      <view bindtap='handleNavigateClick' data-url='../outstock/index' class='section'>
+      <view bindtap='handleNavigateClick' data-urlc='../outstock/index' class='section'>
         <image class='icon' src='../../static/img/u36.png'></image>
         <view class='txt'>配送出库</view>
       </view>

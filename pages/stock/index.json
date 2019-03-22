@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "盘点库存"
+  "navigationBarTitleText": "盘点库存",
+  "enablePullDownRefresh": true
 }

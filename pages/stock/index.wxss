@@ -136,12 +136,6 @@
   display: flex;
   align-items: center;
 }
-.container .popmasker .main .row .ipt {
-  flex: 1;
-  border: 1rpx solid #ddd;
-  box-sizing: border-box;
-  padding: 0 16rpx;
-}
 .container .popmasker .main .row .icon {
   width: 44rpx;
   height: 44rpx;

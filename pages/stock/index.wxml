@@ -42,8 +42,7 @@
       </view>
       <view class='row'>
         <view class='inf-2'>
-          <text class='name'>盘点人：</text>
-          <input placeholder='请输入盘点人' bindblur='checkeriptblur' class='ipt'></input>
+          <text class='name'>盘点人：{{userinfo.name}}</text>
         </view>
         <view class='inf-2'>单位：{{clickItem.itemUnit}}</view>
       </view>
@@ -91,5 +90,9 @@
       <picker bindchange='bindsupplierChange' mode='selector' valule='{{index}}' range='{{catelist}}' class='pricker' range-key='itemClsname'>{{cate}}</picker>
       <view class='btn' bindtap='handleCateClick'>确定</view>
     </view>
+  </view>
+  <view class='notdata' wx:if='{{orderlist.length==0}}'>
+    <icon type='info' size='88rpx' color='#37d192'></icon>
+    <text class='txt'>暂时木有内容呀~</text>
   </view>
 </view>

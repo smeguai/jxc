@@ -1,14 +1,13 @@
 {
   "pages": [
-    "pages/accomplish/index",
     "pages/index/index",
+    "pages/signin/index",
     "pages/joinstock/index",
-    "pages/outofstock/index",
+    "pages/accomplish/index",
     "pages/goodsmode/index",
     "pages/addorder/index",
     "pages/outstock/index",
-    "pages/stock/index",
-    "pages/signin/index"
+    "pages/stock/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#37d192",

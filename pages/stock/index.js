@@ -12,17 +12,16 @@ Page({
     userinfo: null,
     pageindex: 1,
     pagesize: 10,
-    itemSubno: '',
-    itemName: '',
+    condition: '',
     catelist: [],
     cate: '请选择',
+    cateNo: 0,
     orderlist: [],
     checkstatus: ['未盘点', '已盘点'],
-    checker: '',
     clickItem: null,
-    notRequires: false,
     //  0 未盘点 1 已盘点
-    checker_mode: ''
+    checker_mode: '',
+    pageNum: 1
   },
   Statustoogle(e) {
     this.setData({
@@ -33,18 +32,16 @@ Page({
     this.setData({
       orderlist: [],
       pageIndex: 1,
-      itemSubno: '',
-      itemName: e.detail.value
+      conditione: e.detail.value
     })
     this.getcheckList()
   },
   getcheckList() {
     let data = {
       deptId: this.data.userinfo.id,
-      itemSubno: this.data.itemSubno,
-      itemName: this.data.itemName,
+      condition: this.data.condition,
       checkStatus: this.data.checker_mode,
-      itemType: this.data.cate == "请选择" || this.data.cate == "全部" ? "" : this.data.cate,
+      itemType: this.data.cate == "请选择" || this.data.cate == "全部" ? "" : this.data.cateNo,
       pageIndex: this.data.pageindex,
       pageSize: this.data.pagesize
     }
@@ -52,27 +49,21 @@ Page({
       if (res.status === 200) {
         if (!res.data) {
           this.setData({
-            orderlist: []
+            orderlist: [],
+            condition: ''
           })
           return
         }
         this.setData({
-          orderlist: [...this.data.orderlist, ...res.data.data],
-          notRequires: res.data.total >= 10 ? false : true
+          orderlist: [...this.data.orderlist, ...res.data.stocks],
+          pageNum: res.data.pageNum
         })
       }
     })
-  },
-  checkeriptblur(e) {
-    let t = e.detail.value.replace(/(^\s*)|(\s*$)/g, "")
-    if (t) {
-      this.setData({
-        checker: e.detail.value
-      })
-    }
+    wx.stopPullDownRefresh()
   },
   handleSubmitClick() {
-    if (this.data.checker && this.data.checknumber) {
+    if (this.data.checknumber) {
       let item = this.data.clickItem
       let data = {
         sysCode: this.data.userinfo.sysCode,
@@ -80,26 +71,35 @@ Page({
         deptName: this.data.userinfo.simplename,
         itemId: item.itemId,
         itemSubno: item.itemSubno,
-        itemNo: item.itemNo,
+        itemNo: item.itemNo, 
         itemName: item.itemName,
         itemUnit: item.itemUnit,
         itemSize: item.itemSize, 
         checkNum: this.data.checknumber, 
-        checker: this.data.checker,
+        checker: this.data.userinfo.name,
         memo: ''
       }
       check(data).then(res => {
         if (res.status === 200) {
           wx.showToast({
             title: '盘点成功!',
-            icon: 'none'
+            icon: 'none',
+            success: () => {
+              setTimeout(() =>{
+                this.setData({
+                  pageindex: 1,
+                  orderlist: []
+                }),
+                  this.getcheckList()
+              }, 500)
+            }
           })
         }
       })
       this.popconfirmToggle()
     } else {
       wx.showToast({
-        title: '请录入信息！',
+        title: '请确定盘点数量信息！',
         icon: 'none'
       })
     }
@@ -115,15 +115,14 @@ Page({
   },
   bindsupplierChange(e) {
     this.setData({
-      cate: this.data.catelist[e.detail.value].itemClsname
+      cate: this.data.catelist[e.detail.value].itemClsname,
+      cateNo: this.data.catelist[e.detail.value].itemClsno
     })
   },
   handleCateClick() {
     this.setData({
       pageIndex: 1,
-      orderlist: [],
-      itemSubno: '',
-      itemName: ''
+      orderlist: []
     })
     this.getcheckList()
   },
@@ -142,6 +141,13 @@ Page({
       userinfo: wx.getStorageSync('userinfo')
     })
     this.getItemCls()
+    this.getcheckList()
+  },
+  onPullDownRefresh() {
+    this.setData({
+      pageindex: 1,
+      orderlist: []
+    }),
     this.getcheckList()
   },
   handleFilterClick() {
@@ -180,7 +186,6 @@ Page({
     })
   },
   onReachBottom: function () {
-    if (this.data.notRequires) return
     this.setData({
       pageindex: this.data.pageindex + 1
     })
@@ -192,8 +197,7 @@ Page({
         this.setData({
           orderlist: [],
           pageIndex: 1,
-          itemSubno: res.result,
-          itemName: ''
+          condition: res.result
         })
         this.getcheckList()
       },

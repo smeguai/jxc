@@ -8,6 +8,7 @@ Page({
     createDate: '',
     purStatus: '',
     supplierId: '',
+    supplierIdx: '',
     supplierList: [],
     purList: [],
     pageSize: 10,
@@ -29,7 +30,7 @@ Page({
     getSupplier(data).then(res => {
       if (res.status === 200) {
         this.setData({
-          supplierList: res.data
+          supplierList: [{ supplierName: '请选择', id: ''},...res.data]
         })
       }
     })
@@ -62,7 +63,8 @@ Page({
     let index = e.detail.value
     let currentId = this.data.supplierList[index].id
     this.setData({
-      supplierId: e.detail.value,
+      supplierId: currentId,
+      supplierIdx: e.detail.value,
       condition: this.data.supplierList[index].supplierName
     })
   },
@@ -93,6 +95,7 @@ Page({
         })
       }
     })
+    wx.stopPullDownRefresh()
   },
   Statustoogle(e) {
     this.setData({
@@ -103,20 +106,17 @@ Page({
     let mode = parseInt(e.currentTarget.dataset.mode)
     let item = this.data.purList[e.currentTarget.dataset.key]
     let sysCode = this.data.userinfo.sysCode
-    let { deptId, deptName, supplierId, supplierName, orderNo, skuNum, created} = item
+    let { deptId, deptName, supplierId, supplierName, orderNo, skuNum, created, purType} = item
     switch (mode) {
       case 1:
-        // wx.navigateTo({
-        //   url: `../accomplish/index?stockMode=1&sysCode=${sysCode}&deptId=${deptId}&deptName=${deptName}&supplierId=${supplierId}&supplierName=${supplierName}&orderNo=${orderNo}&skuNum=${skuNum}&created=${created}`
-        // })
         wx.navigateTo({
-          url: `../accomplish/index?stockMode=1&sysCode=${1}&deptId=${1}&deptName=${'asd'}&supplierId=${1}&supplierName=${'aaaaa'}&orderNo=${'po112201'}&skuNum=${14}&created=${'2017-10-10'}`
+          url: `../accomplish/index?stockMode=1&sysCode=${sysCode}&deptId=${deptId}&deptName=${deptName}&supplierId=${supplierId}&supplierName=${supplierName}&orderNo=${orderNo}&skuNum=${skuNum}&created=${created}`
         })
       break;
       case 0:
       case 2:
         wx.navigateTo({
-          url: `../goodsmode/index?stockMode=1&sysCode=${sysCode}&deptId=${deptId}&deptName=${deptName}&supplierId=${supplierId}&supplierName=${supplierName}&orderNo=${orderNo}&skuNum=${skuNum}&created=${created}`
+          url: `../goodsmode/index?stockMode=1&sysCode=${sysCode}&deptId=${deptId}&deptName=${deptName}&supplierId=${supplierId}&supplierName=${supplierName}&orderNo=${orderNo}&skuNum=${skuNum}&created=${created}&purType=${purType}`
         })
       break;
     }
@@ -124,6 +124,13 @@ Page({
   onReachBottom: function () {
     this.setData({
       pageIndex: this.data.pageIndex + 1
+    })
+    this.handleConfirmClick()
+  },
+  onPullDownRefresh() {
+    this.setData({
+      pageIndex: 1,
+      purList: []
     })
     this.handleConfirmClick()
   }

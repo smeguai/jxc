@@ -1,39 +1,40 @@
 <view class='container'>
   <view class='detail'>
     <view class='row'>
-      <view class='no'>单号：DO1234567890</view>
-      <view class='created'>2019.01.09</view>
+      <view class='no'>单号：{{orderNo}}</view>
+      <view class='created'>{{created}}</view>
     </view>
     <view class='row'>
-      <view class='txt'>线路：线路100001</view>
-      <view class='sku'>sku数量：<text class='num'>4</text></view>
+      <view class='txt' wx:if='{{mode==1}}'>供应商：{{supplierName}}</view>
+      <view class='txt' wx:if='{{mode==2}}'>线路：{{routeName}}</view>
+      <view class='sku'>sku数量：<text class='num'>{{skuNum}}</text></view>
     </view>
   </view>
 
   <view class='section'><text class='title'>商品</text></view>
 
   <view class='list-wrapper'>
-    <view class='item'>
-      <view class='qacode'>编号：1234567890123456</view>
+    <view class='item' wx:for='{{list}}' >
+      <view class='qacode'>编号：{{item.itemSubno}}</view>
       <view class='info'>
-        <view class='name'>越南甜心芒果新鲜当季水果</view>
+        <view class='name'>{{item.itemName}}</view>
         <view class='text-wrapper'>
-          <view class='text'>规格：10斤/箱</view>
-          <view class='text'>保质期：100天</view>
-          <view class='text'>单位：斤</view>
-          <block wx:if='{{true}}'>
-            <view class='text'>应出：<text class='t'>500斤</text></view>
-            <view class='text'>实出：<text class='t'>500斤</text></view>
+          <view class='text'>规格：{{item.itemSize}}</view>
+          <view class='text'>保质期：{{item.expirationDate}}</view>
+          <view class='text'>单位：{{item.itemUnit}}</view>
+          <block wx:if='{{mode==1}}'>
+            <view class='text'>应收：<text class='t'>{{item.purNum}}</text></view>
+            <view class='text'>实收：<text class='t'>{{item.takeNum}}</text></view>
           </block>
-          <block wx:if='{{true}}'>
-            <view class='text'>应收：<text class='t'>500斤</text></view>
-            <view class='text'>实收：<text class='t'>500斤</text></view>
+          <block wx:if='{{mode==2}}'>
+            <view class='text'>应出：<text class='t'>{{item.shouldNum}}</text></view>
+            <view class='text'>实出：<text class='t'>{{item.outNum}}</text></view>
           </block>
-          <view class='text'>差异：<text class='t'>0</text></view>
+          <view class='text'>差异：<text class='t'>{{item.differenceNum || 0}}</text></view>
         </view>
       </view>
-      <image class='icon' wx:if='{{true}}' src='../../static/img/u1280.png'></image>
-      <image class='icon' wx:if='{{false}}' src='../../static/img/u133.png'></image>
+      <image class='icon' wx:if='{{mode==1}}' src='../../static/img/u1280.png'></image>
+      <image class='icon' wx:if='{{mode==2}}' src='../../static/img/u133.png'></image>
     </view>
   </view>
 </view>

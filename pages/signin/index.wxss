@@ -1,5 +1,6 @@
 .container {
   padding: 0 40rpx;
+  box-sizing: border-box;
 }
 .container .section {
   display: flex;
